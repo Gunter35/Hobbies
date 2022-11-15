@@ -34,5 +34,16 @@
             public const int MaxMovieDescription = 5000;
             public const int MinMovieDescription = 5;
         }
+        public class User
+        {
+            public const int MaxUserUsername = 20;
+            public const int MinUserUsername = 5;
+
+            public const int MaxUserEmail = 60;
+            public const int MinUserEmail = 10;
+
+            public const int MaxUserPassword = 20;
+            public const int MinUserPassword = 5;
+        }
     }
 }

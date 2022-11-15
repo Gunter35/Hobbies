@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hobbies.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221105181420_CreatingTables")]
-    partial class CreatingTables
+    [Migration("20221113122927_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -34,6 +34,11 @@ namespace Hobbies.Infrastructure.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(5000)
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("GenreId")
                         .HasColumnType("uniqueidentifier");
@@ -75,27 +80,27 @@ namespace Hobbies.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("59327d29-bb5d-41da-aecc-9f26c4dff9b6"),
+                            Id = new Guid("208fe6ba-5751-4cef-9f1b-e06b57a02897"),
                             Name = "Fantasy"
                         },
                         new
                         {
-                            Id = new Guid("44b246f3-2d1d-42e3-9aea-b767a5855850"),
+                            Id = new Guid("0e0dc037-ea69-44c1-96c5-cd83fd3b47ce"),
                             Name = "Adventure"
                         },
                         new
                         {
-                            Id = new Guid("20ebc0e3-59e4-404f-8794-a67b0a628fb6"),
+                            Id = new Guid("ae4d971f-5f58-4b70-b912-414730401975"),
                             Name = "Romance"
                         },
                         new
                         {
-                            Id = new Guid("370930a8-12ae-4f93-9fa5-b3d6a2b46a09"),
+                            Id = new Guid("6b290ed7-bb57-47e5-8905-c1096606da9b"),
                             Name = "Horror"
                         },
                         new
                         {
-                            Id = new Guid("239fbbde-9c17-4f8e-a93c-ca6858d76886"),
+                            Id = new Guid("fa954523-d903-4e82-b516-c3d4baedf49d"),
                             Name = "Development"
                         });
                 });
@@ -105,6 +110,11 @@ namespace Hobbies.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(5000)
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Director")
                         .IsRequired()
@@ -151,27 +161,27 @@ namespace Hobbies.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("e887236d-39bf-4f6b-b0ef-e99572710c35"),
+                            Id = new Guid("d1e24659-4077-480c-ad8d-6ed2b43516bc"),
                             Name = "Action"
                         },
                         new
                         {
-                            Id = new Guid("dbbccbc2-3599-4490-a2e0-044e17ddbf9e"),
+                            Id = new Guid("53221e4b-644d-4c2b-8b70-a44e3500e9e3"),
                             Name = "Comedy"
                         },
                         new
                         {
-                            Id = new Guid("b425d0c4-b7ad-4e5e-8b39-cbb513cb23ac"),
+                            Id = new Guid("4e49f645-e4c1-449e-b047-6562539ce421"),
                             Name = "Drama"
                         },
                         new
                         {
-                            Id = new Guid("63c90fd3-54ea-4689-bb18-ea3fcf512555"),
+                            Id = new Guid("2f8d96b2-a0fd-4624-b2ab-b1136b0f44ff"),
                             Name = "Fantasy"
                         },
                         new
                         {
-                            Id = new Guid("2f355d36-0ffb-4c61-8c04-4c6def8c9780"),
+                            Id = new Guid("4f0692e2-dc67-4d95-8ac2-66f4129d90b1"),
                             Name = "Horror"
                         });
                 });
@@ -473,7 +483,7 @@ namespace Hobbies.Infrastructure.Migrations
                         .IsRequired();
 
                     b.HasOne("Hobbies.Infrastructure.Data.Models.User", "User")
-                        .WithMany()
+                        .WithMany("UsersMovies")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -557,6 +567,8 @@ namespace Hobbies.Infrastructure.Migrations
             modelBuilder.Entity("Hobbies.Infrastructure.Data.Models.User", b =>
                 {
                     b.Navigation("UsersBooks");
+
+                    b.Navigation("UsersMovies");
                 });
 #pragma warning restore 612, 618
         }
