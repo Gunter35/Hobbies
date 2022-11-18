@@ -2,6 +2,7 @@
 using Hobbies.Core.Models.Book;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Hobbies.Controllers
 {
@@ -63,6 +64,23 @@ namespace Hobbies.Controllers
                 ModelState.AddModelError("", "Something went wrong");
                 throw;
             }
+        }
+
+        public async Task<IActionResult> AddToCollection(Guid bookId)
+        {
+            try
+            {
+                var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+
+                await bookService.AddBookToCollectionAsync(bookId, userId);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return RedirectToAction(nameof(All));
         }
     }
 }
