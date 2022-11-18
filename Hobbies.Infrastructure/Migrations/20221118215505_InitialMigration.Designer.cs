@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hobbies.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221113122927_InitialMigration")]
+    [Migration("20221118215505_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -80,27 +80,27 @@ namespace Hobbies.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("208fe6ba-5751-4cef-9f1b-e06b57a02897"),
+                            Id = new Guid("7c84325a-bd7a-444d-9e7e-eeab0d010c68"),
                             Name = "Fantasy"
                         },
                         new
                         {
-                            Id = new Guid("0e0dc037-ea69-44c1-96c5-cd83fd3b47ce"),
+                            Id = new Guid("7467101c-ec09-48bf-8682-7dfafdd4a44d"),
                             Name = "Adventure"
                         },
                         new
                         {
-                            Id = new Guid("ae4d971f-5f58-4b70-b912-414730401975"),
+                            Id = new Guid("1d717425-a83d-452b-87ab-39db1ff4aca8"),
                             Name = "Romance"
                         },
                         new
                         {
-                            Id = new Guid("6b290ed7-bb57-47e5-8905-c1096606da9b"),
+                            Id = new Guid("0a63c034-1273-4364-9a77-106b0aab571b"),
                             Name = "Horror"
                         },
                         new
                         {
-                            Id = new Guid("fa954523-d903-4e82-b516-c3d4baedf49d"),
+                            Id = new Guid("36fa6587-0979-4d6b-8f92-b7d8a887d542"),
                             Name = "Development"
                         });
                 });
@@ -161,29 +161,96 @@ namespace Hobbies.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("d1e24659-4077-480c-ad8d-6ed2b43516bc"),
+                            Id = new Guid("70d4d31d-3edf-4b22-b74f-413dc81578d1"),
                             Name = "Action"
                         },
                         new
                         {
-                            Id = new Guid("53221e4b-644d-4c2b-8b70-a44e3500e9e3"),
+                            Id = new Guid("5b72a53a-0774-4b06-8e31-2bca87bad3d5"),
                             Name = "Comedy"
                         },
                         new
                         {
-                            Id = new Guid("4e49f645-e4c1-449e-b047-6562539ce421"),
+                            Id = new Guid("d5e64049-966f-4423-9655-1965b3a8896f"),
                             Name = "Drama"
                         },
                         new
                         {
-                            Id = new Guid("2f8d96b2-a0fd-4624-b2ab-b1136b0f44ff"),
+                            Id = new Guid("baa6c21d-5bce-4332-9793-8f79afcba552"),
                             Name = "Fantasy"
                         },
                         new
                         {
-                            Id = new Guid("4f0692e2-dc67-4d95-8ac2-66f4129d90b1"),
+                            Id = new Guid("639d6974-de1d-4495-b7d8-4a047be46683"),
                             Name = "Horror"
                         });
+                });
+
+            modelBuilder.Entity("Hobbies.Infrastructure.Data.Models.User", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", (string)null);
                 });
 
             modelBuilder.Entity("Hobbies.Infrastructure.Data.Models.UserBook", b =>
@@ -266,79 +333,6 @@ namespace Hobbies.Infrastructure.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetRoleClaims", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -426,13 +420,6 @@ namespace Hobbies.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Hobbies.Infrastructure.Data.Models.User", b =>
-                {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
-
-                    b.HasDiscriminator().HasValue("User");
-                });
-
             modelBuilder.Entity("Hobbies.Infrastructure.Data.Models.Book", b =>
                 {
                     b.HasOne("Hobbies.Infrastructure.Data.Models.BookGenre", "Genre")
@@ -504,7 +491,7 @@ namespace Hobbies.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("Hobbies.Infrastructure.Data.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -513,7 +500,7 @@ namespace Hobbies.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("Hobbies.Infrastructure.Data.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -528,7 +515,7 @@ namespace Hobbies.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("Hobbies.Infrastructure.Data.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -537,7 +524,7 @@ namespace Hobbies.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("Hobbies.Infrastructure.Data.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

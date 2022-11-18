@@ -1,15 +1,16 @@
 ﻿using Hobbies.Core.Models.Book;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Hobbies.Infrastructure.Data.Models;
 
 namespace Hobbies.Core.Contracts
 {
     public interface IBookService
     {
         Task<IEnumerable<BookViewModel>> GetAllAsync();
-        //Task<IEnumerable<Genre>> GetCategoriesAsync();
+
+        Task<IEnumerable<BookGenre>> GetGenresAsync();
+
+        Task AddBookAsync(AddBookViewModel book);
+
+        Task AddBookToCollectionAsync(Guid bookId, string userId);
     }
 }

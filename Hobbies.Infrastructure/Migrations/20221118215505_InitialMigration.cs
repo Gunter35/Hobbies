@@ -28,7 +28,6 @@ namespace Hobbies.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
@@ -278,11 +277,11 @@ namespace Hobbies.Infrastructure.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("0e0dc037-ea69-44c1-96c5-cd83fd3b47ce"), "Adventure" },
-                    { new Guid("208fe6ba-5751-4cef-9f1b-e06b57a02897"), "Fantasy" },
-                    { new Guid("6b290ed7-bb57-47e5-8905-c1096606da9b"), "Horror" },
-                    { new Guid("ae4d971f-5f58-4b70-b912-414730401975"), "Romance" },
-                    { new Guid("fa954523-d903-4e82-b516-c3d4baedf49d"), "Development" }
+                    { new Guid("0a63c034-1273-4364-9a77-106b0aab571b"), "Horror" },
+                    { new Guid("1d717425-a83d-452b-87ab-39db1ff4aca8"), "Romance" },
+                    { new Guid("36fa6587-0979-4d6b-8f92-b7d8a887d542"), "Development" },
+                    { new Guid("7467101c-ec09-48bf-8682-7dfafdd4a44d"), "Adventure" },
+                    { new Guid("7c84325a-bd7a-444d-9e7e-eeab0d010c68"), "Fantasy" }
                 });
 
             migrationBuilder.InsertData(
@@ -290,11 +289,11 @@ namespace Hobbies.Infrastructure.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("2f8d96b2-a0fd-4624-b2ab-b1136b0f44ff"), "Fantasy" },
-                    { new Guid("4e49f645-e4c1-449e-b047-6562539ce421"), "Drama" },
-                    { new Guid("4f0692e2-dc67-4d95-8ac2-66f4129d90b1"), "Horror" },
-                    { new Guid("53221e4b-644d-4c2b-8b70-a44e3500e9e3"), "Comedy" },
-                    { new Guid("d1e24659-4077-480c-ad8d-6ed2b43516bc"), "Action" }
+                    { new Guid("5b72a53a-0774-4b06-8e31-2bca87bad3d5"), "Comedy" },
+                    { new Guid("639d6974-de1d-4495-b7d8-4a047be46683"), "Horror" },
+                    { new Guid("70d4d31d-3edf-4b22-b74f-413dc81578d1"), "Action" },
+                    { new Guid("baa6c21d-5bce-4332-9793-8f79afcba552"), "Fantasy" },
+                    { new Guid("d5e64049-966f-4423-9655-1965b3a8896f"), "Drama" }
                 });
 
             migrationBuilder.CreateIndex(
