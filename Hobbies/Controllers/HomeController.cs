@@ -8,6 +8,11 @@ namespace Hobbies.Controllers
     {
         public IActionResult Index()
         {
+            if (User?.Identity?.IsAuthenticated ?? false)
+            {
+                return RedirectToAction("All", "Books");
+            }
+
             return View();
         }
 

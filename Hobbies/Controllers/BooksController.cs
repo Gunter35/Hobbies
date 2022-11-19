@@ -82,5 +82,29 @@ namespace Hobbies.Controllers
 
             return RedirectToAction(nameof(All));
         }
+
+
+        public async Task<IActionResult> Mine()
+        {
+            if (User.Identity?.IsAuthenticated ?? false)
+            {
+                var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+
+                var model = await bookService.GetMineAsync(userId);
+
+                return View(model);
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        public async Task<IActionResult> RemoveFromCollection(Guid bookId)
+        {
+            var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            await bookService.RemoveBookFromCollectionAsync(bookId, userId);
+
+            return RedirectToAction(nameof(Mine));
+        }
     }
+
 }

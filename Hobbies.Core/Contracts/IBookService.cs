@@ -12,5 +12,9 @@ namespace Hobbies.Core.Contracts
         Task AddBookAsync(AddBookViewModel book);
 
         Task AddBookToCollectionAsync(Guid bookId, string userId);
+
+        Task<IEnumerable<BookViewModel>> GetMineAsync(string userId);
+
+        Task RemoveBookFromCollectionAsync(Guid bookId, string userId);
     }
 }

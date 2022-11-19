@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hobbies.Core.Models.Book
+namespace Hobbies.Core.Models.Movie
 {
-    public class AddBookViewModel
+    public class AddMovieViewModel
     {
         public string Title { get; set; } = null!;
 
-        public string Author { get; set; } = null!;
+        public string Director { get; set; } = null!;
 
         public string Description { get; set; } = null!;
 
@@ -21,6 +21,6 @@ namespace Hobbies.Core.Models.Book
 
         public Guid GenreId { get; set; }
 
-        public IEnumerable<BookGenre> Genres { get; set; } = new List<BookGenre>();
+        public IEnumerable<MovieGenre> Genres { get; set; } = new List<MovieGenre>();
     }
 }
