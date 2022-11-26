@@ -18,6 +18,8 @@ namespace Hobbies.Core.Contracts
 
         Task AddMovieToCollectionAsync(Guid movieId, string userId);
 
+        Task<IEnumerable<MovieViewModel>> GetMineAsync(string userId);
 
+        Task RemoveMovieFromCollectionAsync(Guid movieId, string userId);
     }
 }

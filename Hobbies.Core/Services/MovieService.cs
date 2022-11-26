@@ -38,7 +38,7 @@ namespace Hobbies.Core.Services
 
         public async Task AddMovieToCollectionAsync(Guid movieId, string userId)
         {
-            var user = context.Users
+            var user = await context.Users
                 .Where(u => u.Id == userId)
                 .Include(u => u.UsersMovies)
                 .FirstOrDefaultAsync();
@@ -54,6 +54,19 @@ namespace Hobbies.Core.Services
             {
                 throw new ArgumentException("Invalid movie Id");
             }
+
+            if (!user.UsersMovies.Any(m => m.MovieId == movieId))
+            {
+                user.UsersMovies.Add(new UserMovie()
+                {
+                    MovieId = movieId,
+                    UserId = userId,
+                    Movie = movie,
+                    User = user
+                });
+            }
+
+            await context.SaveChangesAsync();
 
         }
 
@@ -79,6 +92,54 @@ namespace Hobbies.Core.Services
         public async Task<IEnumerable<MovieGenre>> GetGenresAsync()
         {
             return await context.MoviesGenres.ToListAsync();
+        }
+
+        public async Task<IEnumerable<MovieViewModel>> GetMineAsync(string userId)
+        {
+            var user = await context.Users
+            .Where(u => u.Id == userId)
+            .Include(u => u.UsersMovies)
+            .ThenInclude(um => um.Movie)
+            .ThenInclude(m => m.Genre)
+            .FirstOrDefaultAsync(u => u.Id == userId);
+
+            if (user == null)
+            {
+                throw new ArgumentException("Invalid user Id");
+            }
+
+            return user.UsersMovies
+                .Select(m => new MovieViewModel()
+                {
+                    Director = m.Movie.Director,
+                    Genre = m.Movie.Genre?.Name,
+                    Id = m.MovieId,
+                    ImageUrl = m.Movie.ImageUrl,
+                    Rating = m.Movie.Rating,
+                    Title = m.Movie.Title,
+                    Description = m.Movie.Description
+                });
+        }
+
+        public async Task RemoveMovieFromCollectionAsync(Guid movieId, string userId)
+        {
+            var user = await context.Users
+            .Where(u => u.Id == userId)
+            .Include(u => u.UsersMovies)
+            .FirstOrDefaultAsync(u => u.Id == userId);
+
+            if (user == null)
+            {
+                throw new ArgumentException("Invalid user Id");
+            }
+
+            var movie = user.UsersMovies.FirstOrDefault(m => m.MovieId == movieId);
+
+            if (movie != null)
+            {
+                user.UsersMovies.Remove(movie);
+                await context.SaveChangesAsync();
+            }
         }
     }
 }

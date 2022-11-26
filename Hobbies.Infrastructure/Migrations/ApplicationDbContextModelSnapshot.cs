@@ -78,27 +78,27 @@ namespace Hobbies.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("7c84325a-bd7a-444d-9e7e-eeab0d010c68"),
+                            Id = new Guid("7512e081-e127-4c29-a4a3-6cfc06231de8"),
                             Name = "Fantasy"
                         },
                         new
                         {
-                            Id = new Guid("7467101c-ec09-48bf-8682-7dfafdd4a44d"),
+                            Id = new Guid("6e07fa30-ef21-4625-a622-177fd34c5bd6"),
                             Name = "Adventure"
                         },
                         new
                         {
-                            Id = new Guid("1d717425-a83d-452b-87ab-39db1ff4aca8"),
+                            Id = new Guid("61f1167c-ab56-4a8f-9547-df0752ad2caa"),
                             Name = "Romance"
                         },
                         new
                         {
-                            Id = new Guid("0a63c034-1273-4364-9a77-106b0aab571b"),
+                            Id = new Guid("bdc34823-14f8-43c4-960d-914eb55e7f55"),
                             Name = "Horror"
                         },
                         new
                         {
-                            Id = new Guid("36fa6587-0979-4d6b-8f92-b7d8a887d542"),
+                            Id = new Guid("344b54a4-0a8b-41e9-adb4-91878d52eaca"),
                             Name = "Development"
                         });
                 });
@@ -159,27 +159,27 @@ namespace Hobbies.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("70d4d31d-3edf-4b22-b74f-413dc81578d1"),
+                            Id = new Guid("5982b7e4-a7e8-4e24-b923-f4206eb17877"),
                             Name = "Action"
                         },
                         new
                         {
-                            Id = new Guid("5b72a53a-0774-4b06-8e31-2bca87bad3d5"),
+                            Id = new Guid("09dfb94f-b9ad-408d-8078-c001316a6e44"),
                             Name = "Comedy"
                         },
                         new
                         {
-                            Id = new Guid("d5e64049-966f-4423-9655-1965b3a8896f"),
+                            Id = new Guid("068fa92e-cda3-4f7c-a512-bd2dd94dba26"),
                             Name = "Drama"
                         },
                         new
                         {
-                            Id = new Guid("baa6c21d-5bce-4332-9793-8f79afcba552"),
+                            Id = new Guid("043a74a0-e996-425d-be9a-16c92a03af88"),
                             Name = "Fantasy"
                         },
                         new
                         {
-                            Id = new Guid("639d6974-de1d-4495-b7d8-4a047be46683"),
+                            Id = new Guid("310b5364-30cd-4a57-8683-de9d83ada499"),
                             Name = "Horror"
                         });
                 });

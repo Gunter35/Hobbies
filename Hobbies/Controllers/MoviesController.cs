@@ -1,6 +1,7 @@
 ﻿using Hobbies.Core.Contracts;
 using Hobbies.Core.Models.Movie;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Hobbies.Controllers
 {
@@ -61,6 +62,45 @@ namespace Hobbies.Controllers
                 ModelState.AddModelError("", "Something went wrong");
                 throw;
             }
+        }
+
+        public async Task<IActionResult> AddToCollection(Guid movieId)
+        {
+            try
+            {
+                var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+
+                await movieService.AddMovieToCollectionAsync(movieId, userId);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return RedirectToAction(nameof(All));
+        }
+
+        public async Task<IActionResult> Mine()
+        {
+            if (User.Identity?.IsAuthenticated ?? false)
+            {
+                var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+
+                var model = await movieService.GetMineAsync(userId);
+
+                return View(model);
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        public async Task<IActionResult> RemoveFromCollection(Guid movieId)
+        {
+            var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            await movieService.RemoveMovieFromCollectionAsync(movieId, userId);
+
+            return RedirectToAction(nameof(Mine));
         }
     }
 }
