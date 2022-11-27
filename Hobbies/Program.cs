@@ -32,6 +32,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 
 builder.Services.AddScoped<IBookService, BookService>();
 builder.Services.AddScoped<IMovieService, MovieService>();
+builder.Services.AddScoped<IGameService, GameService>();
 
 var app = builder.Build();
 
