@@ -16,14 +16,18 @@ namespace Hobbies.Infrastructure.Data
         public DbSet<BookGenre> BooksGenres { get; set; }
         public DbSet<Movie> Movies { get; set; }
         public DbSet<MovieGenre> MoviesGenres { get; set; }
+        public DbSet<Game> Games { get; set; }
+        public DbSet<GameGenre> GamesGenres { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new UserConfiguration());
             builder.ApplyConfiguration(new UserBookConfiguration());
             builder.ApplyConfiguration(new UserMovieConfiguration());
+            builder.ApplyConfiguration(new UserGameConfiguration());
             builder.ApplyConfiguration(new BookGenreConfiguration());
             builder.ApplyConfiguration(new MovieGenreConfiguration());
+            builder.ApplyConfiguration(new GameGenreConfiguration());
 
             base.OnModelCreating(builder);
         }

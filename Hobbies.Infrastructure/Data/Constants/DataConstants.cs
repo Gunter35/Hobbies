@@ -34,6 +34,22 @@
             public const int MaxMovieDescription = 5000;
             public const int MinMovieDescription = 5;
         }
+        public class Game
+        {
+            public const int MaxGameName = 50;
+            public const int MinGameName = 5;
+
+            public const int MaxGameCreator = 50;
+            public const int MinGameCreator = 5;
+
+            public const int MaxGameDescription = 5000;
+            public const int MinGameDescription = 5;
+        }
+        public class GameGenre
+        {
+            public const int MaxGenreName = 50;
+            public const int MinGenreName = 5;
+        }
         public class User
         {
             public const int MaxUserUsername = 20;

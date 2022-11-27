@@ -6,5 +6,6 @@ namespace Hobbies.Infrastructure.Data.Models
     {
         public ICollection<UserBook> UsersBooks { get; set; } = new List<UserBook>();
         public ICollection<UserMovie> UsersMovies { get; set; } = new List<UserMovie>();
+        public ICollection<UserGame> UsersGames { get; set; } = new List<UserGame>();
     }
 }

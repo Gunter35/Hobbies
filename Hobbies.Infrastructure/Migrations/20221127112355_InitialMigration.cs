@@ -61,6 +61,18 @@ namespace Hobbies.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "GamesGenres",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GamesGenres", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "MoviesGenres",
                 columns: table => new
                 {
@@ -202,6 +214,29 @@ namespace Hobbies.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Games",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Creator = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", maxLength: 5000, nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Rating = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    GenreId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Games", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Games_GamesGenres_GenreId",
+                        column: x => x.GenreId,
+                        principalTable: "GamesGenres",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Movies",
                 columns: table => new
                 {
@@ -249,6 +284,30 @@ namespace Hobbies.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "UserGame",
+                columns: table => new
+                {
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    GameId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserGame", x => new { x.UserId, x.GameId });
+                    table.ForeignKey(
+                        name: "FK_UserGame_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserGame_Games_GameId",
+                        column: x => x.GameId,
+                        principalTable: "Games",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "UserMovie",
                 columns: table => new
                 {
@@ -277,11 +336,23 @@ namespace Hobbies.Infrastructure.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("344b54a4-0a8b-41e9-adb4-91878d52eaca"), "Development" },
-                    { new Guid("61f1167c-ab56-4a8f-9547-df0752ad2caa"), "Romance" },
-                    { new Guid("6e07fa30-ef21-4625-a622-177fd34c5bd6"), "Adventure" },
-                    { new Guid("7512e081-e127-4c29-a4a3-6cfc06231de8"), "Fantasy" },
-                    { new Guid("bdc34823-14f8-43c4-960d-914eb55e7f55"), "Horror" }
+                    { new Guid("80803bc6-7908-45b4-8808-b815f1f34213"), "Fantasy" },
+                    { new Guid("a03dc8ac-669b-4cf7-af80-6e5dbc89bcea"), "Horror" },
+                    { new Guid("a74114cd-d5cf-49a7-855f-6a966fade0cf"), "Development" },
+                    { new Guid("bceeabc0-e1bf-4bf6-9f2a-8cdb14d53c12"), "Romance" },
+                    { new Guid("e80cb26c-a26d-4a74-afe0-803cd1ccc96c"), "Adventure" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "GamesGenres",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { new Guid("64c74735-5c06-4bde-9f0c-fcd5e387a0b9"), "Fighting" },
+                    { new Guid("bc0282ac-1a23-4a9e-a96f-b065f81825f1"), "Survival" },
+                    { new Guid("d4082dd9-8e5f-41c7-9c3a-e1423e2cbc93"), "Shooter" },
+                    { new Guid("ebd359cb-5854-446b-8330-a2980e925be4"), "Battle Royale" },
+                    { new Guid("f9096d22-5138-440b-b090-e796d28bbac4"), "Platform" }
                 });
 
             migrationBuilder.InsertData(
@@ -289,11 +360,11 @@ namespace Hobbies.Infrastructure.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("043a74a0-e996-425d-be9a-16c92a03af88"), "Fantasy" },
-                    { new Guid("068fa92e-cda3-4f7c-a512-bd2dd94dba26"), "Drama" },
-                    { new Guid("09dfb94f-b9ad-408d-8078-c001316a6e44"), "Comedy" },
-                    { new Guid("310b5364-30cd-4a57-8683-de9d83ada499"), "Horror" },
-                    { new Guid("5982b7e4-a7e8-4e24-b923-f4206eb17877"), "Action" }
+                    { new Guid("2207e5f8-8fee-484c-99e7-c5cf187c499a"), "Horror" },
+                    { new Guid("4c56ffd5-f86a-4901-bd18-fdb10e13c151"), "Action" },
+                    { new Guid("537ef699-31d6-4bdc-a703-e4405a527cd7"), "Comedy" },
+                    { new Guid("9a6443a5-1cf4-4e90-a5e4-849bb1432cc3"), "Drama" },
+                    { new Guid("b7dd420f-fdd3-4ff4-a71f-fe0487becf09"), "Fantasy" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -341,6 +412,11 @@ namespace Hobbies.Infrastructure.Migrations
                 column: "GenreId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Games_GenreId",
+                table: "Games",
+                column: "GenreId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Movies_GenreId",
                 table: "Movies",
                 column: "GenreId");
@@ -349,6 +425,11 @@ namespace Hobbies.Infrastructure.Migrations
                 name: "IX_UserBook_BookId",
                 table: "UserBook",
                 column: "BookId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserGame_GameId",
+                table: "UserGame",
+                column: "GameId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserMovie_MovieId",
@@ -377,6 +458,9 @@ namespace Hobbies.Infrastructure.Migrations
                 name: "UserBook");
 
             migrationBuilder.DropTable(
+                name: "UserGame");
+
+            migrationBuilder.DropTable(
                 name: "UserMovie");
 
             migrationBuilder.DropTable(
@@ -386,6 +470,9 @@ namespace Hobbies.Infrastructure.Migrations
                 name: "Books");
 
             migrationBuilder.DropTable(
+                name: "Games");
+
+            migrationBuilder.DropTable(
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
@@ -393,6 +480,9 @@ namespace Hobbies.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "BooksGenres");
+
+            migrationBuilder.DropTable(
+                name: "GamesGenres");
 
             migrationBuilder.DropTable(
                 name: "MoviesGenres");
