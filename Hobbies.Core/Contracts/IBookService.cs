@@ -16,5 +16,9 @@ namespace Hobbies.Core.Contracts
         Task<IEnumerable<BookViewModel>> GetMineAsync(string userId);
 
         Task RemoveBookFromCollectionAsync(Guid bookId, string userId);
+
+        Task<EditBookViewModel> GetForEditAsync(Guid id);
+
+        Task EditAsync(EditBookViewModel book);
     }
 }

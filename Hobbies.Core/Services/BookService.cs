@@ -64,6 +64,19 @@ namespace Hobbies.Core.Services
             await context.SaveChangesAsync();
         }
 
+        public async Task EditAsync(EditBookViewModel book)
+        {
+            var entity = await context.Books.FindAsync(book.Id);
+
+            entity.Rating = book.Rating;
+            entity.Title = book.Title;
+            entity.Description = book.Description;
+            entity.Author = book.Author;
+            entity.ImageUrl = book.ImageUrl;
+
+            await context.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<BookViewModel>> GetAllAsync()
         {
             var entities = await context.Books
@@ -81,6 +94,25 @@ namespace Hobbies.Core.Services
                     Rating = b.Rating,
                     Genre = b?.Genre.Name
                 });
+        }
+
+        public async Task<EditBookViewModel> GetForEditAsync(Guid id)
+        {
+            var book = await context.Books.FindAsync(id);
+            var model = new EditBookViewModel()
+            {
+                Id = book.Id,
+                Author = book.Author,
+                Description = book.Description,
+                Rating = book.Rating,
+                ImageUrl = book.ImageUrl,
+                GenreId = book.GenreId,
+                Title = book.Title
+            };
+
+            model.Genres = await GetGenresAsync();
+
+            return model;
         }
 
         public async Task<IEnumerable<BookGenre>> GetGenresAsync()

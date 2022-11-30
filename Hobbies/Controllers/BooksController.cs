@@ -29,6 +29,7 @@ namespace Hobbies.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [HttpGet]
         public async Task<IActionResult> Add()
         {
             if (User.Identity?.IsAuthenticated ?? false)
@@ -45,6 +46,7 @@ namespace Hobbies.Controllers
 
         }
 
+        [HttpPost]
         public async Task<IActionResult> Add(AddBookViewModel model)
         {
             if (!ModelState.IsValid)
@@ -102,6 +104,29 @@ namespace Hobbies.Controllers
             await bookService.RemoveBookFromCollectionAsync(bookId, userId);
 
             return RedirectToAction(nameof(Mine));
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Edit(Guid id)
+        {
+            var model = await bookService.GetForEditAsync(id);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Edit(EditBookViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            await bookService.EditAsync(model);
+
+            return RedirectToAction(nameof(All));
         }
     }
 
