@@ -28,6 +28,8 @@ namespace Hobbies.Infrastructure.Data
             builder.ApplyConfiguration(new BookGenreConfiguration());
             builder.ApplyConfiguration(new MovieGenreConfiguration());
             builder.ApplyConfiguration(new GameGenreConfiguration());
+            builder.ApplyConfiguration(new RoleConfiguration());
+            builder.ApplyConfiguration(new UserRoleConfiguration());
 
             base.OnModelCreating(builder);
         }

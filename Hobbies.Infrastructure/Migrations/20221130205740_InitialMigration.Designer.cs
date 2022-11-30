@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hobbies.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221127112355_InitialMigration")]
+    [Migration("20221130205740_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -80,27 +80,27 @@ namespace Hobbies.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("80803bc6-7908-45b4-8808-b815f1f34213"),
+                            Id = new Guid("9607ae16-633a-4e54-87f6-fc0e65c064bf"),
                             Name = "Fantasy"
                         },
                         new
                         {
-                            Id = new Guid("e80cb26c-a26d-4a74-afe0-803cd1ccc96c"),
+                            Id = new Guid("343285ad-04b9-4d28-9dc5-d86f881f592f"),
                             Name = "Adventure"
                         },
                         new
                         {
-                            Id = new Guid("bceeabc0-e1bf-4bf6-9f2a-8cdb14d53c12"),
+                            Id = new Guid("2997c86a-00d4-4283-98d2-3c00af6ae7e4"),
                             Name = "Romance"
                         },
                         new
                         {
-                            Id = new Guid("a03dc8ac-669b-4cf7-af80-6e5dbc89bcea"),
+                            Id = new Guid("da09864f-e431-4c7c-bec7-904fa25cbe4d"),
                             Name = "Horror"
                         },
                         new
                         {
-                            Id = new Guid("a74114cd-d5cf-49a7-855f-6a966fade0cf"),
+                            Id = new Guid("dd8646cc-e133-4ab5-b2b8-03dbcf7085ec"),
                             Name = "Development"
                         });
                 });
@@ -161,27 +161,27 @@ namespace Hobbies.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("f9096d22-5138-440b-b090-e796d28bbac4"),
+                            Id = new Guid("17687372-67cd-4f8a-a653-30fec963c69f"),
                             Name = "Platform"
                         },
                         new
                         {
-                            Id = new Guid("d4082dd9-8e5f-41c7-9c3a-e1423e2cbc93"),
+                            Id = new Guid("0f0491e2-0d92-4c2f-bfea-265582dbf5c9"),
                             Name = "Shooter"
                         },
                         new
                         {
-                            Id = new Guid("64c74735-5c06-4bde-9f0c-fcd5e387a0b9"),
+                            Id = new Guid("f8bc2942-4df1-4e8b-9036-daa2945b64f2"),
                             Name = "Fighting"
                         },
                         new
                         {
-                            Id = new Guid("bc0282ac-1a23-4a9e-a96f-b065f81825f1"),
+                            Id = new Guid("80031254-7c12-4dd9-aa66-2accdd3824f2"),
                             Name = "Survival"
                         },
                         new
                         {
-                            Id = new Guid("ebd359cb-5854-446b-8330-a2980e925be4"),
+                            Id = new Guid("bcf5261f-092d-4802-84c0-75a1a60a9b1e"),
                             Name = "Battle Royale"
                         });
                 });
@@ -242,27 +242,27 @@ namespace Hobbies.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("4c56ffd5-f86a-4901-bd18-fdb10e13c151"),
+                            Id = new Guid("599f43e7-1ecb-4ed9-b446-822cc3b51ce9"),
                             Name = "Action"
                         },
                         new
                         {
-                            Id = new Guid("537ef699-31d6-4bdc-a703-e4405a527cd7"),
+                            Id = new Guid("46ac7639-d2cb-4614-bf56-14592a8409ac"),
                             Name = "Comedy"
                         },
                         new
                         {
-                            Id = new Guid("9a6443a5-1cf4-4e90-a5e4-849bb1432cc3"),
+                            Id = new Guid("d2c552e4-d662-46db-b749-53c7fdb3452f"),
                             Name = "Drama"
                         },
                         new
                         {
-                            Id = new Guid("b7dd420f-fdd3-4ff4-a71f-fe0487becf09"),
+                            Id = new Guid("cb4d3c71-f60c-4e6d-89f9-6f10c0bc9533"),
                             Name = "Fantasy"
                         },
                         new
                         {
-                            Id = new Guid("2207e5f8-8fee-484c-99e7-c5cf187c499a"),
+                            Id = new Guid("7aba75ca-53b7-4f4f-8b02-2913c71cfef8"),
                             Name = "Horror"
                         });
                 });
@@ -332,6 +332,40 @@ namespace Hobbies.Infrastructure.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "a91b540c-0c5e-484e-8eed-ba58172d1a14",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "f82dc8eb-98d2-4942-b67f-9e4eec78d7dd",
+                            Email = "admin@gmail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@GMAIL.COM",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBFOGdTXitqo9akVNcgkiPkYDtykn8q7sntRpshWJITFQggVtcV+g95gpBEoLPnvAw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "107d7748-30ee-4341-afdc-910f48cc13de",
+                            TwoFactorEnabled = false,
+                            UserName = "Admin"
+                        },
+                        new
+                        {
+                            Id = "488d4eec-f740-4d33-8698-235bbb7ae9ba",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "bf8a3e82-f94f-4263-a255-760e37e201f6",
+                            Email = "user@gmail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "USER@GMAIL.COM",
+                            NormalizedUserName = "PESHO",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMlt4/DkLLBsf4ps119HTWbLCS0nX2e5rpZL42KGM2YIod5n1Pd0s/dLkP+GOol8Lw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "cfc0a656-3278-49f4-9ebb-f5a4fe29d882",
+                            TwoFactorEnabled = false,
+                            UserName = "Pesho"
+                        });
                 });
 
             modelBuilder.Entity("Hobbies.Infrastructure.Data.Models.UserBook", b =>
@@ -404,6 +438,14 @@ namespace Hobbies.Infrastructure.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "457552bb-4e96-43e5-a4d6-b76290144ac0",
+                            ConcurrencyStamp = "2761f5ee-0f1e-4f1b-a4ef-915b2ffd56a5",
+                            Name = "Admin"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -493,6 +535,13 @@ namespace Hobbies.Infrastructure.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "a91b540c-0c5e-484e-8eed-ba58172d1a14",
+                            RoleId = "457552bb-4e96-43e5-a4d6-b76290144ac0"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>

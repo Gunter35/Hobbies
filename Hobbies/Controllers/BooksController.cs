@@ -29,7 +29,6 @@ namespace Hobbies.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        [HttpGet]
         public async Task<IActionResult> Add()
         {
             if (User.Identity?.IsAuthenticated ?? false)
@@ -46,7 +45,6 @@ namespace Hobbies.Controllers
 
         }
 
-        [HttpPost]
         public async Task<IActionResult> Add(AddBookViewModel model)
         {
             if (!ModelState.IsValid)

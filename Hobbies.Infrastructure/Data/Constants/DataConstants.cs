@@ -1,6 +1,6 @@
 ﻿namespace Hobbies.Infrastructure.Data.Constants
 {
-    public class DataConstants
+    public static class DataConstants
     {
         public class BookGenre
         {
