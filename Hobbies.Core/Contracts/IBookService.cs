@@ -20,5 +20,7 @@ namespace Hobbies.Core.Contracts
         Task<EditBookViewModel> GetForEditAsync(Guid id);
 
         Task EditAsync(EditBookViewModel book);
+
+        Task DeleteAsync(Guid id);
     }
 }

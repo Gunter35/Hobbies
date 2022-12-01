@@ -109,5 +109,11 @@ namespace Hobbies.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
+        [HttpGet]
+        public IActionResult Error()
+        {
+            return View("", "Somenthing went wrong");
+        }
     }
 }

@@ -64,6 +64,19 @@ namespace Hobbies.Core.Services
             await context.SaveChangesAsync();
         }
 
+        public async Task DeleteAsync(Guid id)
+        {
+            var book = await context.Books.FirstOrDefaultAsync(book => book.Id == id);
+
+            if (book == null)
+            {
+                throw new ArgumentException("Invalid book Id");
+            }
+
+            context.Books.Remove(book);
+            context.SaveChanges();
+        }
+
         public async Task EditAsync(EditBookViewModel book)
         {
             var entity = await context.Books.FindAsync(book.Id);
@@ -101,7 +114,7 @@ namespace Hobbies.Core.Services
             var book = await context.Books.FindAsync(id);
             var model = new EditBookViewModel()
             {
-                Id = book.Id,
+                Id = id,
                 Author = book.Author,
                 Description = book.Description,
                 Rating = book.Rating,

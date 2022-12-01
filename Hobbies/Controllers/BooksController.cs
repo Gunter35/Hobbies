@@ -128,6 +128,19 @@ namespace Hobbies.Controllers
 
             return RedirectToAction(nameof(All));
         }
+
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Delete(Guid bookId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Error", "User");
+            }
+
+            await bookService.DeleteAsync(bookId);
+            return RedirectToAction(nameof(All));
+
+        }
     }
 
 }
