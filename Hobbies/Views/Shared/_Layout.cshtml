@@ -22,38 +22,32 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
+
                         @if (User?.Identity?.IsAuthenticated ?? false)
                         {
-                            @*Books*@
-                            <li class="nav-item">
+                             <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">Hobbies</a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                @*Books*@
+                                <h6 class="dropdown-header">Books</h6>
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Books" asp-action="All">All Books</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Books" asp-action="Add">Add Book</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Books" asp-action="Mine">My Books</a>
-                            </li>
-                            @*Movies*@
-                            <li class="nav-item">
+                                <div class="dropdown-divider"></div>
+                                @*Movies*@
+                                <h6 class="dropdown-header">Movies</h6>
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Movies" asp-action="All">All Movies</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Movies" asp-action="Add">Add Movie</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Movies" asp-action="Mine">My Movies</a>
-                            </li>
-                            @*Games*@
-                            <li class="nav-item">
+                                <div class="dropdown-divider"></div>
+                                @*Games*@
+                                <h6 class="dropdown-header">Games</h6>
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Games" asp-action="All">All Games</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Games" asp-action="Add">Add Game</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Games" asp-action="Mine">My Games</a>
-                            </li>
+                            </div>
+                        </li>
                         }
                     </ul>
                     <partial name="_LoginPartial" />
