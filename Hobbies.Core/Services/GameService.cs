@@ -69,6 +69,32 @@ namespace Hobbies.Core.Services
             await context.SaveChangesAsync();
         }
 
+        public async Task DeleteAsync(Guid id)
+        {
+            var game = await context.Games.FirstOrDefaultAsync(game => game.Id == id);
+
+            if (game == null)
+            {
+                throw new ArgumentException("Invalid game Id");
+            }
+
+            context.Games.Remove(game);
+            await context.SaveChangesAsync();
+        }
+
+        public async Task EditAsync(EditGameViewModel game)
+        {
+            var entity = await context.Games.FindAsync(game.Id);
+
+            entity.Rating = game.Rating;
+            entity.Name = game.Name;
+            entity.Description = game.Description;
+            entity.Creator = game.Creator;
+            entity.ImageUrl = game.ImageUrl;
+
+            await context.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<GameViewModel>> GetAllAsync()
         {
             var entities = await context.Games
@@ -86,6 +112,25 @@ namespace Hobbies.Core.Services
                     Rating = g.Rating,
                     ImageUrl = g.ImageUrl
                 });
+        }
+
+        public async Task<EditGameViewModel> GetForEditAsync(Guid id)
+        {
+            var game = await context.Games.FindAsync(id);
+            var model = new EditGameViewModel()
+            {
+                Id = id,
+                Creator = game.Creator,
+                Description = game.Description,
+                Rating = game.Rating,
+                ImageUrl = game.ImageUrl,
+                GenreId = game.GenreId,
+                Name = game.Name
+            };
+
+            model.Genres = await GetGenresAsync();
+
+            return model;
         }
 
         public async Task<IEnumerable<GameGenre>> GetGenresAsync()

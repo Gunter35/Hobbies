@@ -26,7 +26,7 @@ namespace Hobbies.Controllers
         {
             if (User?.Identity?.IsAuthenticated ?? false)
             {
-                return RedirectToAction("All", "Books");
+                return RedirectToAction("Index", "Home");
             }
 
             var model = new RegisterViewModel();
@@ -69,7 +69,7 @@ namespace Hobbies.Controllers
         {
             if (User?.Identity?.IsAuthenticated ?? false)
             {
-                return RedirectToAction("All", "Books");
+                return RedirectToAction("Index", "Home");
             }
 
             var model = new LoginViewModel();
@@ -94,7 +94,7 @@ namespace Hobbies.Controllers
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("All", "Books");
+                    return RedirectToAction("Index", "Home");
                 }
             }
 

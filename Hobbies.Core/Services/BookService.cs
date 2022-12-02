@@ -74,7 +74,7 @@ namespace Hobbies.Core.Services
             }
 
             context.Books.Remove(book);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
 
         public async Task EditAsync(EditBookViewModel book)

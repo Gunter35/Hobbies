@@ -16,5 +16,11 @@ namespace Hobbies.Core.Contracts
         Task<IEnumerable<GameViewModel>> GetMineAsync(string userId);
 
         Task RemoveGameFromCollectionAsync(Guid gameId, string userId);
+
+        Task<EditGameViewModel> GetForEditAsync(Guid id);
+
+        Task EditAsync(EditGameViewModel game);
+
+        Task DeleteAsync(Guid id);
     }
 }

@@ -102,5 +102,41 @@ namespace Hobbies.Controllers
 
             return RedirectToAction(nameof(Mine));
         }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Edit(Guid id)
+        {
+            var model = await gameService.GetForEditAsync(id);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Edit(EditGameViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            await gameService.EditAsync(model);
+
+            return RedirectToAction(nameof(All));
+        }
+
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Delete(Guid bookId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Error", "User");
+            }
+
+            await gameService.DeleteAsync(bookId);
+            return RedirectToAction(nameof(All));
+
+        }
     }
 }
