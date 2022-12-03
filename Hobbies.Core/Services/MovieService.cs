@@ -70,6 +70,33 @@ namespace Hobbies.Core.Services
 
         }
 
+        public async Task DeleteAsync(Guid id)
+        {
+            var movie = await context.Movies.FirstOrDefaultAsync(movie => movie.Id == id);
+
+            if (movie == null)
+            {
+                throw new ArgumentException("Invalid game Id");
+            }
+
+            context.Movies.Remove(movie);
+            await context.SaveChangesAsync();
+        }
+
+        public async Task EditAsync(EditMovieViewModel movie)
+        {
+            var entity = await context.Movies.FindAsync(movie.Id);
+
+            entity.Rating = movie.Rating;
+            entity.Title = movie.Title;
+            entity.Description = movie.Description;
+            entity.Director = movie.Director;
+            entity.ImageUrl = movie.ImageUrl;
+
+            context.Movies.Update(entity);
+            await context.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<MovieViewModel>> GetAllAsync()
         {
             var entities = await context.Movies
@@ -87,6 +114,25 @@ namespace Hobbies.Core.Services
                     Rating = m.Rating,
                     Genre = m?.Genre.Name
                 });
+        }
+
+        public async Task<EditMovieViewModel> GetForEditAsync(Guid id)
+        {
+            var movie = await context.Movies.FindAsync(id);
+            var model = new EditMovieViewModel()
+            {
+                Id = id,
+                Director = movie.Director,
+                Description = movie.Description,
+                Rating = movie.Rating,
+                ImageUrl = movie.ImageUrl,
+                GenreId = movie.GenreId,
+                Title = movie.Title
+            };
+
+            model.Genres = await GetGenresAsync();
+
+            return model;
         }
 
         public async Task<IEnumerable<MovieGenre>> GetGenresAsync()

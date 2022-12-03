@@ -4,8 +4,15 @@
     ViewBag.Title = "All Books";
 }
 
-
+<style>
+    .text-right {
+        float: right;
+        margin-right: 10px;
+        margin-bottom: 10px;
+    }
+</style>
 <h2 class="text-center">@ViewBag.Title</h2>
+<button type="button" class="text-right" asp-area="" asp-controller="Books" asp-action="Add">+Add Book</button>
 <hr />
 
 <div class="text-center row">

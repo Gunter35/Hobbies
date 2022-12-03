@@ -21,5 +21,11 @@ namespace Hobbies.Core.Contracts
         Task<IEnumerable<MovieViewModel>> GetMineAsync(string userId);
 
         Task RemoveMovieFromCollectionAsync(Guid movieId, string userId);
+        Task<EditMovieViewModel> GetForEditAsync(Guid id);
+
+        Task EditAsync(EditMovieViewModel movie);
+
+        Task DeleteAsync(Guid id);
+
     }
 }

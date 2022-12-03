@@ -1,5 +1,6 @@
 ﻿using Hobbies.Core.Contracts;
 using Hobbies.Core.Models.Movie;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -102,5 +103,41 @@ namespace Hobbies.Controllers
 
             return RedirectToAction(nameof(Mine));
         }
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Edit(Guid id)
+        {
+            var model = await movieService.GetForEditAsync(id);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Edit(EditMovieViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            await movieService.EditAsync(model);
+
+            return RedirectToAction(nameof(All));
+        }
+
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Delete(Guid movieId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Error", "User");
+            }
+
+            await movieService.DeleteAsync(movieId);
+            return RedirectToAction(nameof(All));
+
+        }
+
     }
 }

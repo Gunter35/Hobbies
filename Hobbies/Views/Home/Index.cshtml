@@ -3,30 +3,38 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
-<div class="container">
-  <div class="row">
-    <div class="align-content-align-content-lg-end">
-      <h3>Books</h3>
-        <form class="input-group-sm" asp-controller="Books" asp-action="All">
-                <input type="submit" value="Go to Books!" class="fs-6 btn btn-success mb-3 p-2" />
-        </form>
+<head>
+    <link rel="image" href=".../wwwroot/books.png" />
+    <style>
+        .card-img{
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+@*<div class="container">
+    <div class="row">
+    <h3>Books</h3>
+    <form class="col-sm-4" asp-controller="Books" asp-action="All">
+    <input type="submit" value="Go to Books!" class="fs-6 btn btn-success mb-3 p-2" />
+    </form>
     </div>
     <div class="align-content-lg-center">
-      <h3>Movies</h3>
-        <form class="input-group-sm" asp-controller="Movies" asp-action="All">
-                <input type="submit" value="Go to Movies!" class="fs-6 btn btn-success mb-3 p-2" />
-        </form>
+    <h3>Movies</h3>
+    <form class="col-sm-4 asp-controller="Movies" asp-action="All">
+    <input type="submit" value="Go to Movies!" class="fs-6 btn btn-success mb-3 p-2" />
+    </form>
     </div>
     <div class="align-content-lg-start">
-      <h3>Games</h3>
-      <form class="input-group-sm" asp-controller="Games" asp-action="All">
-                <input type="submit" value="Go to Games!" class="fs-6 btn btn-success mb-3 p-2" />
-        </form>
+    <h3>Games</h3>
+    <form class="col-sm-4" asp-controller="Games" asp-action="All">
+    <input type="submit" value="Go to Games!" class="fs-6 btn btn-success mb-3 p-2" />
+    </form>
     </div>
-  </div>
-</div>
+    </div>*@
+    <div class="card col-2" style="width: 20rem; ">
+            <img class="card-img" style="width: 18rem;"
+             src="~/books.png">
+            <a class="fs-6 btn btn-success mb-3 p-2" asp-area="" asp-controller="Books" asp-action="All">Go to Books!</a>
+     </div>

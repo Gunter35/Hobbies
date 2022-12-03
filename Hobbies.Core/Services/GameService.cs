@@ -3,11 +3,6 @@ using Hobbies.Core.Models.Game;
 using Hobbies.Infrastructure.Data;
 using Hobbies.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hobbies.Core.Services
 {

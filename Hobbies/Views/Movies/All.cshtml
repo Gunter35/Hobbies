@@ -9,22 +9,31 @@
 <hr />
 
 <div class="text-center row">
-    @foreach (var book in Model)
+    @foreach (var movie in Model)
     {
         <div class="card col-4" style="width: 20rem; ">
             <img class="card-img-top" style="width: 18rem;"
-             src="@book.ImageUrl" alt="Book Image">
+             src="@movie.ImageUrl" alt="Movie Image">
             <div class="card-body">
 
-                <h5 class="card-title mt-1">@book.Title</h5>
-                <p class="mb-0">Author: @book.Director</p>
-                <p class="mb-0">Rating: @book.Rating</p>
-                <p>Category: @book.Genre</p>
+                <h5 class="card-title mt-1">@movie.Title</h5>
+                <p class="mb-0">Director: @movie.Director</p>
+                <p class="mb-0">Rating: @movie.Rating</p>
+                <p>Category: @movie.Genre</p>
             </div>
 
-            <form class="input-group-sm" asp-controller="Books" asp-action="AddToCollection" asp-route-bookId="@book.Id">
+            <form class="input-group-sm" asp-controller="Movies" asp-action="AddToCollection" asp-route-bookId="@movie.Id">
                 <input type="submit" value="Add to Collection" class="fs-6 btn btn-success mb-3 p-2" />
             </form>
+            @if (User.IsInRole("Admin"))
+            {
+                <form class="input-group-sm" asp-controller="Movies" asp-action="Edit" asp-route-bookId="@movie.Id">
+                    <input type="submit" value="Edit" class="fs-6 btn btn-success mb-3 p-2" />
+                </form>
+                <form class="input-group-sm" asp-controller="Movies" asp-action="Delete" asp-route-bookId="@movie.Id">
+                    <input type="submit" value="Delete" class="btn btn-danger" />
+                </form>
+            }
         </div>
     }
 </div>
