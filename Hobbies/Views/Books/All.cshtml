@@ -10,14 +10,22 @@
         margin-right: 10px;
         margin-bottom: 10px;
     }
+
+    .mynav-link {
+        /*width: 30px;*/
+        position: fixed;
+        right: 10%;
+    }
 </style>
 <h2 class="text-center">@ViewBag.Title</h2>
-<button type="button" class="text-right" asp-area="" asp-controller="Books" asp-action="Add">+Add Book</button>
+<a class="mynav-link text-dark" asp-controller="Books" asp-action="Add">+Add Book</a>
+
 <hr />
 
 <div class="text-center row">
     @foreach (var book in Model)
     {
+        @Html.HiddenFor(b => book.Id)
         <div class="card col-4" style="width: 20rem; ">
             <img class="card-img-top" style="width: 18rem;"
              src="@book.ImageUrl" alt="Book Image">
@@ -32,11 +40,16 @@
             <form class="input-group-sm" asp-controller="Books" asp-action="AddToCollection" asp-route-bookId="@book.Id">
                 <input type="submit" value="Add to Collection" class="fs-6 btn btn-success mb-3 p-2" />
             </form>
+            <a class="input-group-sm" asp-controller="Books" asp-action="Details" asp-route-bookId="@book.Id">
+                    <input type="submit" value="More" class="fs-6 btn btn-success mb-3 p-2" />
+                </a>
+
             @if (User.IsInRole("Admin"))
             {
-                <form class="input-group-sm" asp-controller="Books" asp-action="Edit" asp-route-bookId="@book.Id">
+                <a class="input-group-sm" asp-controller="Books" asp-action="Edit" asp-route-bookId="@book.Id">
                     <input type="submit" value="Edit" class="fs-6 btn btn-success mb-3 p-2" />
-                </form>
+                </a>
+
                 <form class="input-group-sm" asp-controller="Books" asp-action="Delete" asp-route-bookId="@book.Id">
                     <input type="submit" value="Delete" class="btn btn-danger" />
                 </form>

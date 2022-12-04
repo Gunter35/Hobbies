@@ -64,6 +64,23 @@ namespace Hobbies.Core.Services
             await context.SaveChangesAsync();
         }
 
+        public async Task<BookDetailsViewModel> BookDetailsById(Guid id)
+        {
+            return await context.Books
+                .Where(b => b.Id == id)
+                .Select(b => new BookDetailsViewModel()
+                {
+                    Id = b.Id,
+                    Genre = b.Genre.Name,
+                    Description = b.Description,
+                    ImageUrl = b.ImageUrl,
+                    Title = b.Title,
+                    Rating = b.Rating,
+                    Author = b.Author
+                })
+                .FirstAsync();
+        }
+
         public async Task DeleteAsync(Guid id)
         {
             var book = await context.Books.FirstOrDefaultAsync(book => book.Id == id);
@@ -81,13 +98,25 @@ namespace Hobbies.Core.Services
         {
             var entity = await context.Books.FindAsync(book.Id);
 
+            if (entity == null)
+            {
+                throw new ArgumentException("Book not found");
+            }
+
             entity.Rating = book.Rating;
             entity.Title = book.Title;
             entity.Description = book.Description;
             entity.Author = book.Author;
             entity.ImageUrl = book.ImageUrl;
+            entity.GenreId = book.GenreId;
 
             await context.SaveChangesAsync();
+        }
+
+        public async Task<bool> Exists(Guid id)
+        {
+            return await context.Books
+                .AnyAsync(b => b.Id == id);
         }
 
         public async Task<IEnumerable<BookViewModel>> GetAllAsync()
@@ -109,12 +138,17 @@ namespace Hobbies.Core.Services
                 });
         }
 
-        public async Task<EditBookViewModel> GetForEditAsync(Guid id)
+        public async Task<EditBookViewModel> GetForEditAsync(Guid bookId)
         {
-            var book = await context.Books.FindAsync(id);
+            var book = await context.Books.FindAsync(bookId);
+            if (book == null)
+            {
+                throw new ArgumentException("Book not found");
+            }
+
             var model = new EditBookViewModel()
             {
-                Id = id,
+                Id = bookId,
                 Author = book.Author,
                 Description = book.Description,
                 Rating = book.Rating,

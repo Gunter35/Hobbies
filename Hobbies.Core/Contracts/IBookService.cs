@@ -22,5 +22,9 @@ namespace Hobbies.Core.Contracts
         Task EditAsync(EditBookViewModel book);
 
         Task DeleteAsync(Guid id);
+
+        Task<bool> Exists(Guid id);
+
+        Task<BookDetailsViewModel> BookDetailsById(Guid id);
     }
 }

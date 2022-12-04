@@ -105,9 +105,9 @@ namespace Hobbies.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Edit(Guid id)
+        public async Task<IActionResult> Edit(Guid gameId)
         {
-            var model = await gameService.GetForEditAsync(id);
+            var model = await gameService.GetForEditAsync(gameId);
 
             return View(model);
         }
@@ -118,7 +118,7 @@ namespace Hobbies.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(model);
+                return RedirectToAction("All", "Ganes");
             }
 
             await gameService.EditAsync(model);
@@ -127,16 +127,30 @@ namespace Hobbies.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Delete(Guid bookId)
+        public async Task<IActionResult> Delete(Guid gameId)
         {
             if (!ModelState.IsValid)
             {
                 return RedirectToAction("Error", "User");
             }
 
-            await gameService.DeleteAsync(bookId);
+            await gameService.DeleteAsync(gameId);
             return RedirectToAction(nameof(All));
 
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<IActionResult> Details(Guid gameId)
+        {
+            if ((await gameService.Exists(gameId)) == false)
+            {
+                return RedirectToAction(nameof(All));
+            }
+
+            var model = await gameService.GameDetailsById(gameId);
+
+            return View(model);
         }
     }
 }

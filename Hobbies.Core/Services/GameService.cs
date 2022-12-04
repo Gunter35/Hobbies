@@ -64,6 +64,23 @@ namespace Hobbies.Core.Services
             await context.SaveChangesAsync();
         }
 
+        public async Task<GameDetailsViewModel> GameDetailsById(Guid id)
+        {
+            return await context.Games
+                .Where(g => g.Id == id)
+                .Select(g => new GameDetailsViewModel()
+                {
+                    Id = g.Id,
+                    Genre = g.Genre.Name,
+                    Description = g.Description,
+                    ImageUrl = g.ImageUrl,
+                    Name = g.Name,
+                    Rating = g.Rating,
+                    Creator = g.Creator
+                })
+                .FirstAsync();
+        }
+
         public async Task DeleteAsync(Guid id)
         {
             var game = await context.Games.FirstOrDefaultAsync(game => game.Id == id);
@@ -81,13 +98,25 @@ namespace Hobbies.Core.Services
         {
             var entity = await context.Games.FindAsync(game.Id);
 
+            if (entity == null)
+            {
+                throw new ArgumentException("Book not found");
+            }
+
             entity.Rating = game.Rating;
             entity.Name = game.Name;
             entity.Description = game.Description;
             entity.Creator = game.Creator;
             entity.ImageUrl = game.ImageUrl;
+            entity.GenreId = game.GenreId;
 
             await context.SaveChangesAsync();
+        }
+
+        public async Task<bool> Exists(Guid id)
+        {
+            return await context.Games
+                .AnyAsync(g => g.Id == id);
         }
 
         public async Task<IEnumerable<GameViewModel>> GetAllAsync()
@@ -112,6 +141,11 @@ namespace Hobbies.Core.Services
         public async Task<EditGameViewModel> GetForEditAsync(Guid id)
         {
             var game = await context.Games.FindAsync(id);
+            if (game == null)
+            {
+                throw new ArgumentException("Game not found");
+            }
+
             var model = new EditGameViewModel()
             {
                 Id = id,
