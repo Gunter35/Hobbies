@@ -1,4 +1,5 @@
 ﻿using Hobbies.Core.Models.Book;
+using Hobbies.Core.Models.Comment;
 using Hobbies.Infrastructure.Data.Models;
 
 namespace Hobbies.Core.Contracts
@@ -26,5 +27,7 @@ namespace Hobbies.Core.Contracts
         Task<bool> Exists(Guid id);
 
         Task<BookDetailsViewModel> BookDetailsById(Guid id);
+
+        Task AddComment(Guid bookId, string comment);
     }
 }

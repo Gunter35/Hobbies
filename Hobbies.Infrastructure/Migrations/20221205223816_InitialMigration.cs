@@ -308,6 +308,37 @@ namespace Hobbies.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Comments",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", maxLength: 5000, nullable: false),
+                    BookId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    GameId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    MovieId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Comments_Books_BookId",
+                        column: x => x.BookId,
+                        principalTable: "Books",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Comments_Games_GameId",
+                        column: x => x.GameId,
+                        principalTable: "Games",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Comments_Movies_MovieId",
+                        column: x => x.MovieId,
+                        principalTable: "Movies",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "UserMovie",
                 columns: table => new
                 {
@@ -334,15 +365,15 @@ namespace Hobbies.Infrastructure.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "457552bb-4e96-43e5-a4d6-b76290144ac0", "2761f5ee-0f1e-4f1b-a4ef-915b2ffd56a5", "Admin", null });
+                values: new object[] { "457552bb-4e96-43e5-a4d6-b76290144ac0", "bda8a070-c9be-4510-b86c-9d5808866181", "Admin", null });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "488d4eec-f740-4d33-8698-235bbb7ae9ba", 0, "bf8a3e82-f94f-4263-a255-760e37e201f6", "user@gmail.com", false, false, null, "USER@GMAIL.COM", "PESHO", "AQAAAAEAACcQAAAAEMlt4/DkLLBsf4ps119HTWbLCS0nX2e5rpZL42KGM2YIod5n1Pd0s/dLkP+GOol8Lw==", null, false, "cfc0a656-3278-49f4-9ebb-f5a4fe29d882", false, "Pesho" },
-                    { "a91b540c-0c5e-484e-8eed-ba58172d1a14", 0, "f82dc8eb-98d2-4942-b67f-9e4eec78d7dd", "admin@gmail.com", false, false, null, "ADMIN@GMAIL.COM", "ADMIN", "AQAAAAEAACcQAAAAEBFOGdTXitqo9akVNcgkiPkYDtykn8q7sntRpshWJITFQggVtcV+g95gpBEoLPnvAw==", null, false, "107d7748-30ee-4341-afdc-910f48cc13de", false, "Admin" }
+                    { "488d4eec-f740-4d33-8698-235bbb7ae9ba", 0, "dca8623f-9eb4-4722-a82b-d6391d412565", "user@gmail.com", false, false, null, "USER@GMAIL.COM", "PESHO", "AQAAAAEAACcQAAAAEB9DvnyyaNESUSKrclBflKpp/lP8kjE1oUR7Wvf9SsgNU9OmeUjteEhXbwYL+5WRRw==", null, false, "caba6a92-c4a5-47f1-9d19-2e1d5e46297b", false, "Pesho" },
+                    { "a91b540c-0c5e-484e-8eed-ba58172d1a14", 0, "f909afe2-08a2-4b5c-b5fd-bda673ef9940", "admin@gmail.com", false, false, null, "ADMIN@GMAIL.COM", "ADMIN", "AQAAAAEAACcQAAAAEGX+71QbaxjqFv9YmeOEJtnYafSYPXxApUlYLeyFxXw7qT2hj9MQc5d9QXf4+DqkwA==", null, false, "b5c8fb68-f4f2-4963-810c-f62c3efc71e0", false, "Admin" }
                 });
 
             migrationBuilder.InsertData(
@@ -350,11 +381,11 @@ namespace Hobbies.Infrastructure.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("2997c86a-00d4-4283-98d2-3c00af6ae7e4"), "Romance" },
-                    { new Guid("343285ad-04b9-4d28-9dc5-d86f881f592f"), "Adventure" },
-                    { new Guid("9607ae16-633a-4e54-87f6-fc0e65c064bf"), "Fantasy" },
-                    { new Guid("da09864f-e431-4c7c-bec7-904fa25cbe4d"), "Horror" },
-                    { new Guid("dd8646cc-e133-4ab5-b2b8-03dbcf7085ec"), "Development" }
+                    { new Guid("74bdcbf5-634b-4b42-be2f-094d7ea46e89"), "Fantasy" },
+                    { new Guid("7fa1769d-a44d-42aa-80c1-4c5f9d949186"), "Adventure" },
+                    { new Guid("9e3586d0-4bb5-4b2a-a117-7b55db53c2cb"), "Development" },
+                    { new Guid("c98e649b-7570-42d8-bb10-9cc3828e308c"), "Horror" },
+                    { new Guid("f6bdf477-3762-43c1-82a3-14238c30e61c"), "Romance" }
                 });
 
             migrationBuilder.InsertData(
@@ -362,11 +393,11 @@ namespace Hobbies.Infrastructure.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("0f0491e2-0d92-4c2f-bfea-265582dbf5c9"), "Shooter" },
-                    { new Guid("17687372-67cd-4f8a-a653-30fec963c69f"), "Platform" },
-                    { new Guid("80031254-7c12-4dd9-aa66-2accdd3824f2"), "Survival" },
-                    { new Guid("bcf5261f-092d-4802-84c0-75a1a60a9b1e"), "Battle Royale" },
-                    { new Guid("f8bc2942-4df1-4e8b-9036-daa2945b64f2"), "Fighting" }
+                    { new Guid("2b3cd0d3-77e5-47e5-99da-0bf79195c2c8"), "Platform" },
+                    { new Guid("2b8ec2df-5b54-4596-8a5c-1a9fb50f6f06"), "Fighting" },
+                    { new Guid("6e4aa11e-55b6-41e1-8b05-ff422620dede"), "Shooter" },
+                    { new Guid("7b8c084f-e36a-4be3-8caf-8bc657bd3c22"), "Survival" },
+                    { new Guid("91bad7ff-54b1-4580-921f-8195cb6dd55a"), "Battle Royale" }
                 });
 
             migrationBuilder.InsertData(
@@ -374,11 +405,11 @@ namespace Hobbies.Infrastructure.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("46ac7639-d2cb-4614-bf56-14592a8409ac"), "Comedy" },
-                    { new Guid("599f43e7-1ecb-4ed9-b446-822cc3b51ce9"), "Action" },
-                    { new Guid("7aba75ca-53b7-4f4f-8b02-2913c71cfef8"), "Horror" },
-                    { new Guid("cb4d3c71-f60c-4e6d-89f9-6f10c0bc9533"), "Fantasy" },
-                    { new Guid("d2c552e4-d662-46db-b749-53c7fdb3452f"), "Drama" }
+                    { new Guid("1f7f399e-4811-4b90-a79e-3af597899663"), "Drama" },
+                    { new Guid("6ed0e74b-5f03-433b-9318-f03e2a343951"), "Action" },
+                    { new Guid("8ed6ad42-f16b-4f49-bcab-9782de301860"), "Comedy" },
+                    { new Guid("974d3a9a-728e-429b-aa76-56de3b9b934a"), "Fantasy" },
+                    { new Guid("f043fea8-c164-4da7-869d-1cd7327b7f89"), "Horror" }
                 });
 
             migrationBuilder.InsertData(
@@ -431,6 +462,21 @@ namespace Hobbies.Infrastructure.Migrations
                 column: "GenreId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Comments_BookId",
+                table: "Comments",
+                column: "BookId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comments_GameId",
+                table: "Comments",
+                column: "GameId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comments_MovieId",
+                table: "Comments",
+                column: "MovieId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Games_GenreId",
                 table: "Games",
                 column: "GenreId");
@@ -472,6 +518,9 @@ namespace Hobbies.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Comments");
 
             migrationBuilder.DropTable(
                 name: "UserBook");

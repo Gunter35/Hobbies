@@ -1,5 +1,6 @@
 ﻿using Hobbies.Core.Contracts;
 using Hobbies.Core.Models.Book;
+using Hobbies.Core.Models.Comment;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -142,7 +143,6 @@ namespace Hobbies.Controllers
 
         }
 
-        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> Details(Guid bookId)
         {
@@ -154,6 +154,31 @@ namespace Hobbies.Controllers
             var model = await bookService.BookDetailsById(bookId);
 
             return View(model);
+        }
+
+        public async Task<IActionResult> AddComment(Guid bookId, [FromForm] string comment)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    throw new ArgumentException("Something went wrong...");
+                }
+                if (comment == null)
+                {
+                    throw new ArgumentException("Invalid comment!");
+                }
+                var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+                await bookService.AddComment(bookId, comment);
+
+                return RedirectToAction("Details", "Books", new { @bookId = bookId });
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            
         }
     }
 

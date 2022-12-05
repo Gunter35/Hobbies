@@ -18,6 +18,7 @@ namespace Hobbies.Infrastructure.Data
         public DbSet<MovieGenre> MoviesGenres { get; set; }
         public DbSet<Game> Games { get; set; }
         public DbSet<GameGenre> GamesGenres { get; set; }
+        public DbSet<BookComment> Comments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

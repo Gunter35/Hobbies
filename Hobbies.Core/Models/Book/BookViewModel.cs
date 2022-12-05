@@ -28,5 +28,7 @@ namespace Hobbies.Core.Models.Book
 
         [Required]
         public string? Genre { get; set; }
+
+        //public ICollection<AddCommentViewModel> Comments { get; set; } = new List<AddCommentViewModel>();
     }
 }

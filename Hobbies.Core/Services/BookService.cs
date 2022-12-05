@@ -1,5 +1,6 @@
 ﻿using Hobbies.Core.Contracts;
 using Hobbies.Core.Models.Book;
+using Hobbies.Core.Models.Comment;
 using Hobbies.Infrastructure.Data;
 using Hobbies.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
@@ -64,10 +65,36 @@ namespace Hobbies.Core.Services
             await context.SaveChangesAsync();
         }
 
+        public async Task AddComment(Guid bookId, string comment)
+        {
+            var book = await context.Books.FirstOrDefaultAsync(b => b.Id == bookId);
+            if (book == null)
+            {
+                throw new ArgumentException("Invalid book Id");
+            }
+
+            if (String.IsNullOrEmpty(comment))
+            {
+                throw new ArgumentException("Invalid comment");
+            }
+
+            var currComment = new BookComment()
+            {
+                Description = comment,
+                BookId = book.Id,
+                Book = book
+            };
+
+            book.Comments.Add(currComment);
+            await context.Comments.AddAsync(currComment);
+            await context.SaveChangesAsync();
+        }
+
         public async Task<BookDetailsViewModel> BookDetailsById(Guid id)
         {
             return await context.Books
                 .Where(b => b.Id == id)
+                .Include(b => b.Comments)
                 .Select(b => new BookDetailsViewModel()
                 {
                     Id = b.Id,
@@ -76,7 +103,13 @@ namespace Hobbies.Core.Services
                     ImageUrl = b.ImageUrl,
                     Title = b.Title,
                     Rating = b.Rating,
-                    Author = b.Author
+                    Author = b.Author,
+                    Comments = b.Comments
+                    .Select(c => new CommentViewModel()
+                    {
+                        Description = c.Description,
+                        Id = c.Id
+                    }).ToList()
                 })
                 .FirstAsync();
         }

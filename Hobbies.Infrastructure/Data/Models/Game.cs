@@ -52,5 +52,7 @@ namespace Hobbies.Infrastructure.Data.Models
         /// Sets the connection between Book and UsersBooks tables
         /// </summary>
         public ICollection<UserGame> UsersGames { get; set; } = new List<UserGame>();
+
+        public ICollection<BookComment> Comments { get; set; } = new List<BookComment>();
     }
 }
