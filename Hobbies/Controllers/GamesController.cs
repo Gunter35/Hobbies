@@ -118,7 +118,8 @@ namespace Hobbies.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return RedirectToAction("All", "Ganes");
+                ModelState.AddModelError(string.Empty, "Game not found!");
+                return RedirectToAction("All", "Games");
             }
 
             await gameService.EditAsync(model);

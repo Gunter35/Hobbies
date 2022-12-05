@@ -17,7 +17,7 @@ namespace Hobbies.Core.Contracts
 
         Task RemoveBookFromCollectionAsync(Guid bookId, string userId);
 
-        Task<EditBookViewModel> GetForEditAsync(Guid id);
+        Task<EditBookViewModel> GetForEditAsync(Guid gameId);
 
         Task EditAsync(EditBookViewModel book);
 

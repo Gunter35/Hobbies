@@ -100,7 +100,7 @@ namespace Hobbies.Core.Services
 
             if (entity == null)
             {
-                throw new ArgumentException("Book not found");
+                throw new ArgumentException("Game not found");
             }
 
             entity.Rating = game.Rating;
@@ -138,9 +138,9 @@ namespace Hobbies.Core.Services
                 });
         }
 
-        public async Task<EditGameViewModel> GetForEditAsync(Guid id)
+        public async Task<EditGameViewModel> GetForEditAsync(Guid gameId)
         {
-            var game = await context.Games.FindAsync(id);
+            var game = await context.Games.FindAsync(gameId);
             if (game == null)
             {
                 throw new ArgumentException("Game not found");
@@ -148,7 +148,7 @@ namespace Hobbies.Core.Services
 
             var model = new EditGameViewModel()
             {
-                Id = id,
+                Id = gameId,
                 Creator = game.Creator,
                 Description = game.Description,
                 Rating = game.Rating,
