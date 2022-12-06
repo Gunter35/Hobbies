@@ -161,7 +161,7 @@ namespace Hobbies.Controllers
                 {
                     throw new ArgumentException("Something went wrong...");
                 }
-                if (comment == null)
+                if (comment == null || comment.Contains('<') || comment.Contains("1=1"))
                 {
                     throw new ArgumentException("Invalid comment!");
                 }
@@ -172,8 +172,7 @@ namespace Hobbies.Controllers
             }
             catch (Exception ex)
             {
-
-                throw;
+                return RedirectToAction("Error", "User");
             }
 
         }

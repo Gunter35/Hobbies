@@ -10,6 +10,9 @@
     .input-group-sm {
         text-decoration: none;
     }
+    .card{
+        text-decoration: none;
+    }
 </style>
 
 <div class="container" style="display:inline">
@@ -19,11 +22,11 @@
                  src="@Model.ImageUrl" alt="House Image">
         </div>
         <div class="card col-8 border-0">
-            <p>Name</p>
-            <p style="font-size:25px;"><u>@Model.Title</u></p>
-            <p>Description</p>
+            <h5>Name</h5>
+            <p style="font-size:25px; text-decoration: none;"><u>@Model.Title</u></p>
+            <h5>Description</h5>
             <p>@Model.Description</p>
-            <p>Genre</p>
+            <h5>Genre</h5>
             <p>Genre: <b>@Model.Genre</b></p>
 
             <div class="form-inline">
@@ -40,17 +43,20 @@
                 <a class="input-group-sm" asp-controller="Books" asp-action="AddToCollection" asp-route-bookId="@Model.Id">
                     <input type="submit" value="Add to Collection" class="btn btn-primary" />
                 </a>
+                <br />
+                <br />
+                <h5>Add comment:</h5>
                 <form asp-controller="Books" asp-action="AddComment" method="post" asp-route-bookId="@Model.Id">
-                        <input name="comment"  class="text-danger"/>
+                        <input name="comment" style="height:50px; width:500px" class="text-bold"/>
 
                 </form>
                 <div class="card col-8 border-0">
-                    Comments:
+                    <hr />
+                    <h5>Comments:</h5>
                     @foreach (var comment in Model.Comments)
                     {
-                        <p>@comment.Description</p>
+                        <p style="border-width:3px; border-style:solid; border-color:#6699ff;">@comment.Description</p>
                     }
-                    <hr />
                 </div>
                 
             </div>

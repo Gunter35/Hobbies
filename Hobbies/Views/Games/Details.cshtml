@@ -40,17 +40,20 @@
                 <a class="input-group-sm" asp-controller="Games" asp-action="AddToCollection" asp-route-gameId="@Model.Id">
                     <input type="submit" value="Add to Collection" class="btn btn-primary" />
                 </a>
+                 <br />
+                <br />
+                <h5>Add comment:</h5>
                 <form asp-controller="Games" asp-action="AddComment" method="post" asp-route-gameId="@Model.Id">
-                        <input name="comment"  class="text-danger"/>
+                        <input name="comment" style="height:50px; width:500px" class="text-bold"/>
 
                 </form>
                 <div class="card col-8 border-0">
-                    Comments:
+                    <hr />
+                    <h5>Comments:</h5>
                     @foreach (var comment in Model.Comments)
                     {
-                        <p>@comment.Description</p>
+                        <p style="border-width:3px; border-style:solid; border-color:#6699ff;">@comment.Description</p>
                     }
-                    <hr />
                 </div>
                 
             </div>

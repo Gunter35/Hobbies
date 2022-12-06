@@ -113,7 +113,7 @@ namespace Hobbies.Controllers
         [HttpGet]
         public IActionResult Error()
         {
-            return View("", "Somenthing went wrong");
+            return View();
         }
     }
 }
