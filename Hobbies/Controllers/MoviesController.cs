@@ -118,7 +118,6 @@ namespace Hobbies.Controllers
         {
             if (!ModelState.IsValid)
             {
-                ModelState.AddModelError(string.Empty, "Movie not found!");
                 return RedirectToAction("All", "Movies");
             }
 
