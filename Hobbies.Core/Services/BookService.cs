@@ -78,7 +78,7 @@ namespace Hobbies.Core.Services
                 throw new ArgumentException("Invalid comment");
             }
 
-            var currComment = new BookComment()
+            var currComment = new Comment()
             {
                 Description = comment,
                 BookId = book.Id,

@@ -105,9 +105,9 @@ namespace Hobbies.Controllers
         }
         [HttpGet]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Edit(Guid id)
+        public async Task<IActionResult> Edit(Guid movieId)
         {
-            var model = await movieService.GetForEditAsync(id);
+            var model = await movieService.GetForEditAsync(movieId);
 
             return View(model);
         }
@@ -118,7 +118,8 @@ namespace Hobbies.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(model);
+                ModelState.AddModelError(string.Empty, "Movie not found!");
+                return RedirectToAction("All", "Movies");
             }
 
             await movieService.EditAsync(model);
@@ -137,6 +138,19 @@ namespace Hobbies.Controllers
             await movieService.DeleteAsync(movieId);
             return RedirectToAction(nameof(All));
 
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(Guid movieId)
+        {
+            if ((await movieService.Exists(movieId)) == false)
+            {
+                return RedirectToAction(nameof(All));
+            }
+
+            var model = await movieService.MovieDetailsById(movieId);
+
+            return View(model);
         }
 
     }

@@ -87,14 +87,42 @@ namespace Hobbies.Core.Services
         {
             var entity = await context.Movies.FindAsync(movie.Id);
 
+            if (entity == null)
+            {
+                throw new ArgumentException("Movie not found");
+            }
+
             entity.Rating = movie.Rating;
             entity.Title = movie.Title;
             entity.Description = movie.Description;
             entity.Director = movie.Director;
             entity.ImageUrl = movie.ImageUrl;
+            entity.GenreId = movie.GenreId;
 
-            context.Movies.Update(entity);
             await context.SaveChangesAsync();
+        }
+
+        public async Task<bool> Exists(Guid id)
+        {
+            return await context.Movies
+                .AnyAsync(m => m.Id == id);
+        }
+
+        public async Task<MovieDetailsViewModel> MovieDetailsById(Guid id)
+        {
+            return await context.Movies
+                .Where(m => m.Id == id)
+                .Select(m => new MovieDetailsViewModel()
+                {
+                    Id = m.Id,
+                    Genre = m.Genre.Name,
+                    Description = m.Description,
+                    ImageUrl = m.ImageUrl,
+                    Title = m.Title,
+                    Rating = m.Rating,
+                    Director = m.Director
+                })
+                .FirstAsync();
         }
 
         public async Task<IEnumerable<MovieViewModel>> GetAllAsync()
@@ -116,12 +144,17 @@ namespace Hobbies.Core.Services
                 });
         }
 
-        public async Task<EditMovieViewModel> GetForEditAsync(Guid id)
+        public async Task<EditMovieViewModel> GetForEditAsync(Guid movieId)
         {
-            var movie = await context.Movies.FindAsync(id);
+            var movie = await context.Movies.FindAsync(movieId);
+            if (movie == null)
+            {
+                throw new ArgumentException("Movie not found");
+            }
+
             var model = new EditMovieViewModel()
             {
-                Id = id,
+                Id = movieId,
                 Director = movie.Director,
                 Description = movie.Description,
                 Rating = movie.Rating,
@@ -133,6 +166,7 @@ namespace Hobbies.Core.Services
             model.Genres = await GetGenresAsync();
 
             return model;
+
         }
 
         public async Task<IEnumerable<MovieGenre>> GetGenresAsync()

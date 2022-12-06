@@ -53,6 +53,6 @@ namespace Hobbies.Infrastructure.Data.Models
         /// </summary>
         public ICollection<UserGame> UsersGames { get; set; } = new List<UserGame>();
 
-        public ICollection<BookComment> Comments { get; set; } = new List<BookComment>();
+        public ICollection<Comment> Comments { get; set; } = new List<Comment>();
     }
 }

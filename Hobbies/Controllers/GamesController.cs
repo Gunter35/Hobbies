@@ -140,7 +140,6 @@ namespace Hobbies.Controllers
 
         }
 
-        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> Details(Guid gameId)
         {
