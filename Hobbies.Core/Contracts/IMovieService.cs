@@ -32,5 +32,7 @@ namespace Hobbies.Core.Contracts
 
         Task<MovieDetailsViewModel> MovieDetailsById(Guid id);
 
+        Task AddComment(Guid movieId, string comment);
+
     }
 }

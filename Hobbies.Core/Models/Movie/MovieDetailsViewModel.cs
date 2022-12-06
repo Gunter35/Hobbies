@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hobbies.Core.Models.Comment;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,8 @@ namespace Hobbies.Core.Models.Movie
         public decimal Rating { get; set; }
 
         public string? Genre { get; set; }
+
+        public ICollection<CommentViewModel> Comments { get; set; } = new List<CommentViewModel>();
 
     }
 }

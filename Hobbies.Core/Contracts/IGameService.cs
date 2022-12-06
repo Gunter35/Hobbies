@@ -26,5 +26,7 @@ namespace Hobbies.Core.Contracts
         Task<bool> Exists(Guid id);
 
         Task<GameDetailsViewModel> GameDetailsById(Guid id);
+
+        Task AddComment(Guid gameId, string comment);
     }
 }

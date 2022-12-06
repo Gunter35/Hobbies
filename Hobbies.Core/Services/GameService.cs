@@ -1,4 +1,5 @@
 ﻿using Hobbies.Core.Contracts;
+using Hobbies.Core.Models.Comment;
 using Hobbies.Core.Models.Game;
 using Hobbies.Infrastructure.Data;
 using Hobbies.Infrastructure.Data.Models;
@@ -68,6 +69,7 @@ namespace Hobbies.Core.Services
         {
             return await context.Games
                 .Where(g => g.Id == id)
+                .Include(g => g.Comments)
                 .Select(g => new GameDetailsViewModel()
                 {
                     Id = g.Id,
@@ -76,7 +78,13 @@ namespace Hobbies.Core.Services
                     ImageUrl = g.ImageUrl,
                     Name = g.Name,
                     Rating = g.Rating,
-                    Creator = g.Creator
+                    Creator = g.Creator,
+                    Comments = g.Comments
+                    .Select(c => new CommentViewModel()
+                    {
+                        Description = c.Description,
+                        Id = c.Id
+                    }).ToList()
                 })
                 .FirstAsync();
         }
@@ -214,6 +222,31 @@ namespace Hobbies.Core.Services
                 user.UsersGames.Remove(game);
                 await context.SaveChangesAsync();
             }
+        }
+
+        public async Task AddComment(Guid gameId, string comment)
+        {
+            var game = await context.Games.FirstOrDefaultAsync(g => g.Id == gameId);
+            if (game == null)
+            {
+                throw new ArgumentException("Invalid game Id");
+            }
+
+            if (String.IsNullOrEmpty(comment))
+            {
+                throw new ArgumentException("Invalid comment");
+            }
+
+            var currComment = new Comment()
+            {
+                Description = comment,
+                GameId = gameId,
+                Game = game
+            };
+
+            game.Comments.Add(currComment);
+            await context.Comments.AddAsync(currComment);
+            await context.SaveChangesAsync();
         }
     }
 }

@@ -152,5 +152,30 @@ namespace Hobbies.Controllers
 
             return View(model);
         }
+
+        public async Task<IActionResult> AddComment(Guid gameId, [FromForm] string comment)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    throw new ArgumentException("Something went wrong...");
+                }
+                if (comment == null)
+                {
+                    throw new ArgumentException("Invalid comment!");
+                }
+                var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+                await gameService.AddComment(gameId, comment);
+
+                return RedirectToAction("Details", "Games", new { @gameId = gameId });
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+        }
     }
 }

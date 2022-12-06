@@ -1,4 +1,5 @@
 ﻿using Hobbies.Core.Contracts;
+using Hobbies.Core.Models.Comment;
 using Hobbies.Core.Models.Movie;
 using Hobbies.Infrastructure.Data;
 using Hobbies.Infrastructure.Data.Models;
@@ -111,16 +112,23 @@ namespace Hobbies.Core.Services
         public async Task<MovieDetailsViewModel> MovieDetailsById(Guid id)
         {
             return await context.Movies
-                .Where(m => m.Id == id)
-                .Select(m => new MovieDetailsViewModel()
+                .Where(b => b.Id == id)
+                .Include(b => b.Comments)
+                .Select(b => new MovieDetailsViewModel()
                 {
-                    Id = m.Id,
-                    Genre = m.Genre.Name,
-                    Description = m.Description,
-                    ImageUrl = m.ImageUrl,
-                    Title = m.Title,
-                    Rating = m.Rating,
-                    Director = m.Director
+                    Id = b.Id,
+                    Genre = b.Genre.Name,
+                    Description = b.Description,
+                    ImageUrl = b.ImageUrl,
+                    Title = b.Title,
+                    Rating = b.Rating,
+                    Director = b.Director,
+                    Comments = b.Comments
+                    .Select(c => new CommentViewModel()
+                    {
+                        Description = c.Description,
+                        Id = c.Id
+                    }).ToList()
                 })
                 .FirstAsync();
         }
@@ -220,6 +228,31 @@ namespace Hobbies.Core.Services
                 user.UsersMovies.Remove(movie);
                 await context.SaveChangesAsync();
             }
+        }
+
+        public async Task AddComment(Guid movieId, string comment)
+        {
+            var movie = await context.Movies.FirstOrDefaultAsync(m => m.Id == movieId);
+            if (movie == null)
+            {
+                throw new ArgumentException("Invalid movie Id");
+            }
+
+            if (String.IsNullOrEmpty(comment))
+            {
+                throw new ArgumentException("Invalid comment");
+            }
+
+            var currComment = new Comment()
+            {
+                Description = comment,
+                MovieId = movieId,
+                Movie = movie
+            };
+
+            movie.Comments.Add(currComment);
+            await context.Comments.AddAsync(currComment);
+            await context.SaveChangesAsync();
         }
     }
 }

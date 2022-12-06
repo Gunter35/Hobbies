@@ -7,16 +7,16 @@
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
 <style>
-        .input-group-sm {
-            text-decoration: none;
-        }
-    </style>
+    .input-group-sm {
+        text-decoration: none;
+    }
+</style>
 
 <div class="container" style="display:inline">
     <div class="row">
         <div class="col-4">
             <img class="card-img-top" style="width: 20rem;"
-                 src="@Model.ImageUrl" alt="House Image">
+                 src="@Model.ImageUrl" alt="Movie Image">
         </div>
         <div class="card col-8 border-0">
             <p>Name</p>
@@ -25,6 +25,7 @@
             <p>@Model.Description</p>
             <p>Genre</p>
             <p>Genre: <b>@Model.Genre</b></p>
+
             <div class="form-inline">
                 @if (User.IsInRole("Admin"))
                 {
@@ -37,8 +38,21 @@
                     </a>
                 }
                 <a class="input-group-sm" asp-controller="Movies" asp-action="AddToCollection" asp-route-movieId="@Model.Id">
-                    <input type="submit" value="Add" class="fs-6 btn btn-success mb-3 p-2" />
+                    <input type="submit" value="Add to Collection" class="btn btn-primary" />
                 </a>
+                <form asp-controller="Movies" asp-action="AddComment" method="post" asp-route-movieId="@Model.Id">
+                        <input name="comment"  class="text-danger"/>
+
+                </form>
+                <div class="card col-8 border-0">
+                    Comments:
+                    @foreach (var comment in Model.Comments)
+                    {
+                        <p>@comment.Description</p>
+                    }
+                    <hr />
+                </div>
+                
             </div>
         </div>
     </div>
