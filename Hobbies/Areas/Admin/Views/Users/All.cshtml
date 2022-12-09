@@ -1,0 +1,32 @@
+﻿@model IEnumerable<UserViewModel>
+
+@{
+    ViewBag.Title = "All Users";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th><label>Email</label></th>
+            <th><label>Username</label></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td><label>@user.Email</label></td>
+                <td><label>@user.UserName</label></td>
+                <td>
+@*                    <form asp-area="Admin" asp-controller="User" asp-action="Forget" method="post">
+                        <input type="hidden" value="@user.UserId">
+                        <button type="submit" class="btn btn-danger">Forget</button>
+                    </form>*@
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

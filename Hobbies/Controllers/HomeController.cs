@@ -8,10 +8,10 @@ namespace Hobbies.Controllers
     {
         public IActionResult Index()
         {
-            //if (User?.Identity?.IsAuthenticated ?? false)
-            //{
-            //    return View();
-            //}
+            if (User.IsInRole("Admin"))
+            {
+                return RedirectToAction("Index", "Admin", new { area = "Admin" });  
+            }
 
             return View();
         }

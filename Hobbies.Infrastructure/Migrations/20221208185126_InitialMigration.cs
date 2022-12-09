@@ -364,15 +364,15 @@ namespace Hobbies.Infrastructure.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "457552bb-4e96-43e5-a4d6-b76290144ac0", "dbc97165-fa82-4d76-abce-a9335c1eead1", "Admin", null });
+                values: new object[] { "457552bb-4e96-43e5-a4d6-b76290144ac0", "54882915-55cf-4906-96ff-fcf79c8637fe", "Admin", null });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "488d4eec-f740-4d33-8698-235bbb7ae9ba", 0, "6b07e94c-cfb7-4bdd-9409-12b70e5a22cf", "user@gmail.com", false, false, null, "USER@GMAIL.COM", "PESHO", "AQAAAAEAACcQAAAAEMlUwvmXE0PCAjGg286/aGKqIMPlCnCXRovAzZFpDw7ltCCzxDfOniLI0QK3XgWBxw==", null, false, "18e2e556-d044-49c6-8f47-b0626b435c26", false, "Pesho" },
-                    { "a91b540c-0c5e-484e-8eed-ba58172d1a14", 0, "5b2209b3-a6a9-4f45-9f66-c455bc0567e9", "admin@gmail.com", false, false, null, "ADMIN@GMAIL.COM", "ADMIN", "AQAAAAEAACcQAAAAEEwtScWzfa5O1vdizvFBRu0ukjuH4hP3Pl3cfX9jxNdj+3n2r6WSWN/ExYCndfktng==", null, false, "646a589c-be0b-457d-80f2-28d41ef4e1f6", false, "Admin" }
+                    { "488d4eec-f740-4d33-8698-235bbb7ae9ba", 0, "6f6f86ac-6801-4724-82f7-950c68f22926", "user@gmail.com", false, false, null, "USER@GMAIL.COM", "PESHO", "AQAAAAEAACcQAAAAEAyd8rJARl01BAoXGI9FBSgzv8W93uyJY1vCpR5bz5lsOAqFrVCfkY7cSmBXeefKgg==", null, false, "59203874-63d3-461f-824c-e7acb49cb152", false, "Pesho" },
+                    { "a91b540c-0c5e-484e-8eed-ba58172d1a14", 0, "73c8fae8-7b00-4bfb-bfc3-fff77571964f", "admin@gmail.com", false, false, null, "ADMIN@GMAIL.COM", "ADMIN", "AQAAAAEAACcQAAAAEFyZkKA+RSMALnIfOjfq02o4SmuogaGI4TNMtwfQZDA2e+XkRONMBU9X7PuhJ2iIjw==", null, false, "9c3ee100-28b1-4140-9a77-2450161970e6", false, "Admin" }
                 });
 
             migrationBuilder.InsertData(
@@ -380,11 +380,11 @@ namespace Hobbies.Infrastructure.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("383278ee-4734-40a2-bfee-0757b924372e"), "Horror" },
-                    { new Guid("3ad4d543-45fe-455b-a1f2-36979432cf66"), "Development" },
-                    { new Guid("4f0f13f8-6284-46d8-b399-9bc677ede183"), "Romance" },
-                    { new Guid("78e5fe4c-f256-4d43-951b-fbf0ac1e6ca2"), "Fantasy" },
-                    { new Guid("df38da72-8a1d-49b0-96f1-371afd39b992"), "Adventure" }
+                    { new Guid("164d1b4b-6da3-4c06-99bc-257d86ab386a"), "Horror" },
+                    { new Guid("45a9f3f0-bdc4-4ae1-8f71-8b628ac210c6"), "Development" },
+                    { new Guid("6c5464cc-d910-4303-85fe-bd582f932837"), "Adventure" },
+                    { new Guid("7fe0e941-9193-43dc-9356-70683b9479e3"), "Romance" },
+                    { new Guid("b3408525-8689-4ded-bc72-f5d12a01089f"), "Fantasy" }
                 });
 
             migrationBuilder.InsertData(
@@ -392,11 +392,11 @@ namespace Hobbies.Infrastructure.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("01fa1b04-184f-4f86-aa12-200165e45211"), "Survival" },
-                    { new Guid("248a3f5f-6eff-49a8-b59d-cc43838cda19"), "Battle Royale" },
-                    { new Guid("335c7a43-b989-441b-a796-0895731f6bde"), "Shooter" },
-                    { new Guid("e3b558e1-32c5-4b51-8d34-51a5b04b881e"), "Platform" },
-                    { new Guid("fe91f63a-f1a1-49fe-95ac-75be5dffac42"), "Fighting" }
+                    { new Guid("0033f807-83c0-4a24-8a3a-5c7bb1610984"), "Fighting" },
+                    { new Guid("85224468-a7ba-4bbc-915f-abd2cdd5b696"), "Battle Royale" },
+                    { new Guid("9d972820-edfa-41b4-94a7-bf1ebd0c68cb"), "Survival" },
+                    { new Guid("ed7b0b32-6e03-40e8-b002-d29b780bce05"), "Platform" },
+                    { new Guid("f23fb4af-17b1-4c5c-ab48-8318b032a728"), "Shooter" }
                 });
 
             migrationBuilder.InsertData(
@@ -404,11 +404,11 @@ namespace Hobbies.Infrastructure.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("3b3b358d-9a22-4e5e-b6d9-0e4903f9ebd2"), "Comedy" },
-                    { new Guid("7236b735-9899-460d-af04-8bcb1927174e"), "Drama" },
-                    { new Guid("91fecf02-e465-4d9d-85be-85947c35f11a"), "Fantasy" },
-                    { new Guid("c3c19460-daa6-4cdf-8946-18ff059b52ba"), "Action" },
-                    { new Guid("dd271c68-79d5-41e1-bd22-270506c98298"), "Horror" }
+                    { new Guid("2f3bbd63-070e-462b-be9e-57f459765905"), "Drama" },
+                    { new Guid("30eb62c5-fabd-42be-828b-fc4d774eef8b"), "Horror" },
+                    { new Guid("45299f49-246d-48cb-abfe-37c8cf20d5fc"), "Action" },
+                    { new Guid("a6dc76c0-97ec-4610-9eb7-b2f252c0d406"), "Comedy" },
+                    { new Guid("e9cadaa4-54c5-40a3-b2e2-9c66abdafeab"), "Fantasy" }
                 });
 
             migrationBuilder.InsertData(

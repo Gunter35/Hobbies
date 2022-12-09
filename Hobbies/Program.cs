@@ -1,5 +1,7 @@
 using Hobbies.Core.Contracts;
+using Hobbies.Core.Contracts.Admin;
 using Hobbies.Core.Services;
+using Hobbies.Core.Services.Admin.User;
 using Hobbies.Infrastructure.Data;
 using Hobbies.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Identity;
@@ -34,6 +36,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 builder.Services.AddScoped<IBookService, BookService>();
 builder.Services.AddScoped<IMovieService, MovieService>();
 builder.Services.AddScoped<IGameService, GameService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
 
@@ -57,14 +60,14 @@ app.UseAuthorization();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(
+            name: "default",
+            pattern: "{controller=Home}/{action=Index}/{id?}"
+        );
+
+    endpoints.MapControllerRoute(
             name: "areas",
             pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
           );
-
-    endpoints.MapControllerRoute(
-        name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}"
-        );
 
     app.MapRazorPages();
 });
