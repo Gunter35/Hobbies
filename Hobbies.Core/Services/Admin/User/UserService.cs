@@ -1,12 +1,9 @@
 ﻿using Hobbies.Core.Contracts.Admin;
-using Hobbies.Core.Models.Admin.User;
 using Hobbies.Infrastructure.Data;
+using Microsoft.AspNetCore.Identity;
+using Hobbies.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Hobbies.Core.Models.Admin.User;
 
 namespace Hobbies.Core.Services.Admin.User
 {
@@ -31,5 +28,6 @@ namespace Hobbies.Core.Services.Admin.User
 
             return users;
         }
+
     }
 }

@@ -1,4 +1,6 @@
 ﻿using Hobbies.Core.Contracts.Admin;
+using Hobbies.Infrastructure.Data.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hobbies.Areas.Admin.Controllers
@@ -7,9 +9,11 @@ namespace Hobbies.Areas.Admin.Controllers
     {
         private readonly IUserService userService;
 
+
         public UsersController(IUserService _userService)
         {
             userService = _userService;
+
         }
 
         public async Task<IActionResult> All()
