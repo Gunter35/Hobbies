@@ -167,7 +167,7 @@ namespace Hobbies.Core.Services
                     Description = b.Description,
                     ImageUrl = b.ImageUrl,
                     Rating = b.Rating,
-                    Genre = b?.Genre.Name
+                    Genre = b?.Genre?.Name
                 });
         }
 
