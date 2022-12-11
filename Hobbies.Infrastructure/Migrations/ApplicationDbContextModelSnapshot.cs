@@ -78,27 +78,27 @@ namespace Hobbies.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("b3408525-8689-4ded-bc72-f5d12a01089f"),
+                            Id = new Guid("19ca6901-65a5-4387-8111-f98586ab7189"),
                             Name = "Fantasy"
                         },
                         new
                         {
-                            Id = new Guid("6c5464cc-d910-4303-85fe-bd582f932837"),
+                            Id = new Guid("49405ec1-b0de-4ac2-8916-5a9d4b7810bc"),
                             Name = "Adventure"
                         },
                         new
                         {
-                            Id = new Guid("7fe0e941-9193-43dc-9356-70683b9479e3"),
+                            Id = new Guid("84a6a5ef-1421-4d9f-927c-3227ca2a1a4f"),
                             Name = "Romance"
                         },
                         new
                         {
-                            Id = new Guid("164d1b4b-6da3-4c06-99bc-257d86ab386a"),
+                            Id = new Guid("5c604aa2-0153-482f-a867-6052dced915a"),
                             Name = "Horror"
                         },
                         new
                         {
-                            Id = new Guid("45a9f3f0-bdc4-4ae1-8f71-8b628ac210c6"),
+                            Id = new Guid("135a12e5-a22a-446f-b6a5-e2a853c4891c"),
                             Name = "Development"
                         });
                 });
@@ -190,27 +190,27 @@ namespace Hobbies.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("ed7b0b32-6e03-40e8-b002-d29b780bce05"),
+                            Id = new Guid("4d0ccc72-89bb-42bc-90be-4703cba6f80e"),
                             Name = "Platform"
                         },
                         new
                         {
-                            Id = new Guid("f23fb4af-17b1-4c5c-ab48-8318b032a728"),
+                            Id = new Guid("eb62ee75-f7c0-45f2-9ab9-ef14ec7c2552"),
                             Name = "Shooter"
                         },
                         new
                         {
-                            Id = new Guid("0033f807-83c0-4a24-8a3a-5c7bb1610984"),
+                            Id = new Guid("00995d4f-c8c4-4ee9-a42e-f0a91ab71075"),
                             Name = "Fighting"
                         },
                         new
                         {
-                            Id = new Guid("9d972820-edfa-41b4-94a7-bf1ebd0c68cb"),
+                            Id = new Guid("11c1c196-9435-4e92-a6fc-63434f082952"),
                             Name = "Survival"
                         },
                         new
                         {
-                            Id = new Guid("85224468-a7ba-4bbc-915f-abd2cdd5b696"),
+                            Id = new Guid("98332d45-693f-4073-80aa-2ae401f5a42e"),
                             Name = "Battle Royale"
                         });
                 });
@@ -271,27 +271,27 @@ namespace Hobbies.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("45299f49-246d-48cb-abfe-37c8cf20d5fc"),
+                            Id = new Guid("d9851e67-0478-4dd0-ac22-2d5d7e11b7c4"),
                             Name = "Action"
                         },
                         new
                         {
-                            Id = new Guid("a6dc76c0-97ec-4610-9eb7-b2f252c0d406"),
+                            Id = new Guid("cb9e4902-ca02-440f-b702-413f175693df"),
                             Name = "Comedy"
                         },
                         new
                         {
-                            Id = new Guid("2f3bbd63-070e-462b-be9e-57f459765905"),
+                            Id = new Guid("bff218f5-c61c-4c81-9aea-86c367d82275"),
                             Name = "Drama"
                         },
                         new
                         {
-                            Id = new Guid("e9cadaa4-54c5-40a3-b2e2-9c66abdafeab"),
+                            Id = new Guid("45f0dda5-74e0-4949-b409-b3c991a4c717"),
                             Name = "Fantasy"
                         },
                         new
                         {
-                            Id = new Guid("30eb62c5-fabd-42be-828b-fc4d774eef8b"),
+                            Id = new Guid("d91a0cf1-f19e-4c26-9947-bdb2ce379c36"),
                             Name = "Horror"
                         });
                 });
@@ -367,15 +367,15 @@ namespace Hobbies.Infrastructure.Migrations
                         {
                             Id = "a91b540c-0c5e-484e-8eed-ba58172d1a14",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "73c8fae8-7b00-4bfb-bfc3-fff77571964f",
+                            ConcurrencyStamp = "d75332c5-6449-4e8f-88fd-22a6065b4130",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFyZkKA+RSMALnIfOjfq02o4SmuogaGI4TNMtwfQZDA2e+XkRONMBU9X7PuhJ2iIjw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKZyZltAQYTV1jq9GRGKuoPDN0s7UjUu1skPmzXs+e9HgfLMUPvuYX1Es2gznERBxA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9c3ee100-28b1-4140-9a77-2450161970e6",
+                            SecurityStamp = "271118f3-ca53-4004-97c0-6ea6b7dced1a",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         },
@@ -383,15 +383,15 @@ namespace Hobbies.Infrastructure.Migrations
                         {
                             Id = "488d4eec-f740-4d33-8698-235bbb7ae9ba",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6f6f86ac-6801-4724-82f7-950c68f22926",
+                            ConcurrencyStamp = "f288de49-1c48-489c-9bcc-7b2b42cfe7e8",
                             Email = "user@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@GMAIL.COM",
                             NormalizedUserName = "PESHO",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAyd8rJARl01BAoXGI9FBSgzv8W93uyJY1vCpR5bz5lsOAqFrVCfkY7cSmBXeefKgg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJLZupetw+ukS1ZdoL2+S+sv1A2aWqt2tH0E47OsUz2QSuqBzLtPpHhrsfdyIdCOJA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "59203874-63d3-461f-824c-e7acb49cb152",
+                            SecurityStamp = "2a0a197a-f19a-4220-9dc6-e230c77a674d",
                             TwoFactorEnabled = false,
                             UserName = "Pesho"
                         });
@@ -409,7 +409,7 @@ namespace Hobbies.Infrastructure.Migrations
 
                     b.HasIndex("BookId");
 
-                    b.ToTable("UserBook");
+                    b.ToTable("UsersBooks");
                 });
 
             modelBuilder.Entity("Hobbies.Infrastructure.Data.Models.UserGame", b =>
@@ -424,7 +424,7 @@ namespace Hobbies.Infrastructure.Migrations
 
                     b.HasIndex("GameId");
 
-                    b.ToTable("UserGame");
+                    b.ToTable("UsersGames");
                 });
 
             modelBuilder.Entity("Hobbies.Infrastructure.Data.Models.UserMovie", b =>
@@ -439,7 +439,7 @@ namespace Hobbies.Infrastructure.Migrations
 
                     b.HasIndex("MovieId");
 
-                    b.ToTable("UserMovie");
+                    b.ToTable("UsersMovies");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -472,7 +472,7 @@ namespace Hobbies.Infrastructure.Migrations
                         new
                         {
                             Id = "457552bb-4e96-43e5-a4d6-b76290144ac0",
-                            ConcurrencyStamp = "54882915-55cf-4906-96ff-fcf79c8637fe",
+                            ConcurrencyStamp = "aa420d8c-de23-42ac-8b9b-0c47727719ee",
                             Name = "Admin"
                         });
                 });

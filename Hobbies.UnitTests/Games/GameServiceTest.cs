@@ -1,4 +1,4 @@
-﻿using Hobbies.Core.Models.Movie;
+﻿using Hobbies.Core.Models.Game;
 using Hobbies.Core.Services;
 using Hobbies.Infrastructure.Data;
 using Hobbies.Infrastructure.Data.Models;
@@ -10,60 +10,60 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hobbies.UnitTests.Movies
+namespace Hobbies.UnitTests.Games
 {
-    public class MoviesServiceTest
+    public class GameServiceTest
     {
         [Test]
-        public async Task Create_Method_Should_Add_Movie_To_The_Db()
+        public async Task Create_Method_Should_Add_Game_To_The_Db()
         {
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>()
                .UseInMemoryDatabase(Guid.NewGuid().ToString());
             var dbContext = new ApplicationDbContext(optionsBuilder.Options);
 
-            var movieService = new MovieService(dbContext);
+            var gameService = new GameService(dbContext);
 
             Guid guid = Guid.NewGuid();
 
-            var movie = new AddMovieViewModel()
+            var game = new AddGameViewModel()
             {
-                Title = "Harry Potter",
-                Director = "J. K. Rowling",
+                Name = "Harry Potter",
+                Creator = "J. K. Rowling",
                 ImageUrl = "https://cdn.ozone.bg/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/h/a/a19438e622aa321a0e73f360f1f3f855/harry-potter-and-the-philosopher-s-stone-30.jpg",
                 Rating = 10,
                 GenreId = guid,
                 Description = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
             };
-            await movieService.AddMovieAsync(movie);
+            await gameService.AddGameAsync(game);
 
-            Assert.AreEqual(1, dbContext.Movies.Count());
+            Assert.AreEqual(1, dbContext.Games.Count());
         }
 
         [Test]
-        public async Task AddCommentShouldCreateCommentAndAddItToMoviesComments()
+        public async Task AddCommentShouldCreateCommentAndAddItToGamesComments()
         {
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>()
                .UseInMemoryDatabase(Guid.NewGuid().ToString());
             var dbContext = new ApplicationDbContext(optionsBuilder.Options);
 
-            var movieService = new MovieService(dbContext);
+            var gameService = new GameService(dbContext);
 
             Guid guid = Guid.NewGuid();
 
-            var movie = new AddMovieViewModel()
+            var game = new AddGameViewModel()
             {
-                Title = "Harry Potter",
-                Director = "J. K. Rowling",
+                Name = "Harry Potter",
+                Creator = "J. K. Rowling",
                 ImageUrl = "https://cdn.ozone.bg/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/h/a/a19438e622aa321a0e73f360f1f3f855/harry-potter-and-the-philosopher-s-stone-30.jpg",
                 Rating = 10,
                 GenreId = guid,
                 Description = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
             };
-            await movieService.AddMovieAsync(movie);
+            await gameService.AddGameAsync(game);
 
             string comment = "something to test";
 
-            await movieService.AddComment(dbContext.Movies.First().Id, comment);
+            await gameService.AddComment(dbContext.Games.First().Id, comment);
 
             Assert.AreEqual(comment, dbContext.Comments.First().Description);
 
@@ -76,50 +76,50 @@ namespace Hobbies.UnitTests.Movies
                .UseInMemoryDatabase(Guid.NewGuid().ToString());
             var dbContext = new ApplicationDbContext(optionsBuilder.Options);
 
-            var movieService = new MovieService(dbContext);
+            var gameService = new GameService(dbContext);
 
             Guid guid = Guid.NewGuid();
 
-            var movie = new AddMovieViewModel()
+            var game = new AddGameViewModel()
             {
-                Title = "Harry Potter",
-                Director = "J. K. Rowling",
+                Name = "Harry Potter",
+                Creator = "J. K. Rowling",
                 ImageUrl = "https://cdn.ozone.bg/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/h/a/a19438e622aa321a0e73f360f1f3f855/harry-potter-and-the-philosopher-s-stone-30.jpg",
                 Rating = 10,
                 GenreId = guid,
                 Description = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
             };
-            await movieService.AddMovieAsync(movie);
-            await movieService.DeleteAsync(dbContext.Movies.First().Id);
+            await gameService.AddGameAsync(game);
+            await gameService.DeleteAsync(dbContext.Games.First().Id);
 
-            Assert.AreEqual(0, dbContext.Movies.Count());
+            Assert.AreEqual(0, dbContext.Games.Count());
         }
 
         [Test]
         public async Task CheckingIfGetForEditWorks()
         {
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>()
-               .UseInMemoryDatabase(databaseName: "HobbiesTest");
+               .UseInMemoryDatabase(Guid.NewGuid().ToString());
             var dbContext = new ApplicationDbContext(optionsBuilder.Options);
-             
-            var movieService = new MovieService(dbContext);
+
+            var gameService = new GameService(dbContext);
 
             Guid guid = Guid.NewGuid();
 
-            var movie = new AddMovieViewModel()
+            var game = new AddGameViewModel()
             {
-                Title = "Harry Potter",
-                Director = "J. K. Rowling",
+                Name = "Harry Potter",
+                Creator = "J. K. Rowling",
                 ImageUrl = "https://cdn.ozone.bg/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/h/a/a19438e622aa321a0e73f360f1f3f855/harry-potter-and-the-philosopher-s-stone-30.jpg",
                 Rating = 10,
                 GenreId = guid,
                 Description = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
             };
-            await movieService.AddMovieAsync(movie);
+            await gameService.AddGameAsync(game);
 
-            var result = await movieService.GetForEditAsync(dbContext.Movies.First().Id);
+            var result = await gameService.GetForEditAsync(dbContext.Games.First().Id);
 
-            Assert.AreEqual(dbContext.Movies.First().Id, result.Id);
+            Assert.AreEqual(dbContext.Games.First().Id, result.Id);
         }
 
         [Test]
@@ -129,28 +129,27 @@ namespace Hobbies.UnitTests.Movies
                .UseInMemoryDatabase(Guid.NewGuid().ToString());
             var dbContext = new ApplicationDbContext(optionsBuilder.Options);
 
-            var movieService = new MovieService(dbContext);
+            var gameService = new GameService(dbContext);
 
             Guid guid = Guid.NewGuid();
 
-            var movie = new AddMovieViewModel()
+            var game = new AddGameViewModel()
             {
-                Title = "Harry Potter",
-                Director = "J. K. Rowling",
+                Name = "Harry Potter",
+                Creator = "J. K. Rowling",
                 ImageUrl = "https://cdn.ozone.bg/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/h/a/a19438e622aa321a0e73f360f1f3f855/harry-potter-and-the-philosopher-s-stone-30.jpg",
                 Rating = 10,
                 GenreId = guid,
                 Description = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
             };
-            await movieService.AddMovieAsync(movie);
+            await gameService.AddGameAsync(game);
 
-            var result = await movieService.GetForEditAsync(dbContext.Movies.First().Id);
-            result.Title = "Harry Potter 2";
-            await movieService.EditAsync(result);
+            var result = await gameService.GetForEditAsync(dbContext.Games.First().Id);
+            result.Name = "Harry Potter 2";
+            await gameService.EditAsync(result);
 
-            Assert.AreNotEqual(movie.Title, dbContext.Movies.First().Title);
+            Assert.AreNotEqual(game.Name, dbContext.Games.First().Name);
         }
-
         [Test]
         public async Task CheckingIfGetGenresWorks()
         {
@@ -158,26 +157,26 @@ namespace Hobbies.UnitTests.Movies
                .UseInMemoryDatabase(Guid.NewGuid().ToString());
             var dbContext = new ApplicationDbContext(optionsBuilder.Options);
 
-            var movieService = new MovieService(dbContext);
+            var gameService = new GameService(dbContext);
 
-            var genre = new MovieGenre()
+            var genre = new GameGenre()
             {
                 Name = "horror",
                 Id = Guid.NewGuid()
             };
-            var genre2 = new MovieGenre()
+            var genre2 = new GameGenre()
             {
                 Name = "comedy",
                 Id = Guid.NewGuid()
             };
 
-            dbContext.MoviesGenres.Add(genre);
-            dbContext.MoviesGenres.Add(genre2);
+            dbContext.GamesGenres.Add(genre);
+            dbContext.GamesGenres.Add(genre2);
 
 
-            var result = await movieService.GetGenresAsync();
+            var result = await gameService.GetGenresAsync();
 
-            Assert.AreEqual(dbContext.MoviesGenres.Count(), result.Count());
+            Assert.AreEqual(dbContext.GamesGenres.Count(), result.Count());
         }
 
         [Test]
@@ -187,21 +186,21 @@ namespace Hobbies.UnitTests.Movies
                 .UseInMemoryDatabase(Guid.NewGuid().ToString());
             var dbContext = new ApplicationDbContext(optionsBuilder.Options);
 
-            var movieService = new MovieService(dbContext);
+            var gameService = new GameService(dbContext);
 
             Guid guid = Guid.NewGuid();
 
-            var movie = new AddMovieViewModel()
+            var game = new AddGameViewModel()
             {
-                Title = "Harry Potter",
-                Director = "J. K. Rowling",
+                Name = "Harry Potter",
+                Creator = "J. K. Rowling",
                 ImageUrl = "https://cdn.ozone.bg/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/h/a/a19438e622aa321a0e73f360f1f3f855/harry-potter-and-the-philosopher-s-stone-30.jpg",
                 Rating = 10,
                 GenreId = guid,
                 Description = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
             };
-            await movieService.AddMovieAsync(movie);
-            var result = await movieService.Exists(dbContext.Movies.First().Id);
+            await gameService.AddGameAsync(game);
+            var result = await gameService.Exists(dbContext.Games.First().Id);
             Assert.IsTrue(result);
         }
 
@@ -212,47 +211,47 @@ namespace Hobbies.UnitTests.Movies
                .UseInMemoryDatabase(Guid.NewGuid().ToString());
             var dbContext = new ApplicationDbContext(optionsBuilder.Options);
 
-            var movieService = new MovieService(dbContext);
+            var gameService = new GameService(dbContext);
 
             Guid guid = Guid.NewGuid();
 
-            var movie = new Movie()
+            var game = new Game()
             {
-                Title = "Harry Potter",
-                Director = "J. K. Rowling",
+                Name = "Harry Potter",
+                Creator = "J. K. Rowling",
                 ImageUrl = "https://cdn.ozone.bg/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/h/a/a19438e622aa321a0e73f360f1f3f855/harry-potter-and-the-philosopher-s-stone-30.jpg",
                 Rating = 10,
                 GenreId = guid,
                 Description = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
             };
-            var movie2 = new Movie()
+            var game2 = new Game()
             {
-                Title = "Harry Potter 2",
-                Director = "J. K. Rowling",
+                Name = "Harry Potter 2",
+                Creator = "J. K. Rowling",
                 ImageUrl = "https://cdn.ozone.bg/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/h/a/a19438e622aa321a0e73f360f1f3f855/harry-potter-and-the-philosopher-s-stone-30.jpg",
                 Rating = 10,
                 GenreId = guid,
                 Description = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
             };
 
-            dbContext.Movies.Add(movie);
-            dbContext.Movies.Add(movie2);
+            dbContext.Games.Add(game);
+            dbContext.Games.Add(game2);
 
-            var result = await movieService.GetAllAsync();
+            var result = await gameService.GetAllAsync();
 
-            Assert.AreEqual(dbContext.Movies.Count(), result.Count());
+            Assert.AreEqual(dbContext.Games.Count(), result.Count());
         }
 
         [Test]
-        public async Task CheckingIfAddMovieToCollectionWorks()
+        public async Task CheckingIfAddGameToCollectionWorks()
         {
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>()
                .UseInMemoryDatabase(Guid.NewGuid().ToString());
             var dbContext = new ApplicationDbContext(optionsBuilder.Options);
 
-            var movieService = new MovieService(dbContext);
+            var gameService = new GameService(dbContext);
             Guid genreId = Guid.NewGuid();
-            Guid movieId = Guid.NewGuid();
+            Guid gameId = Guid.NewGuid();
 
 
             var user = new User()
@@ -262,27 +261,27 @@ namespace Hobbies.UnitTests.Movies
                 Email = "pesho@gmail.com"
             };
 
-            var movie = new Movie()
+            var game = new Game()
             {
-                Id = movieId,
-                Title = "Harry Potter 2",
-                Director = "J. K. Rowling",
+                Id = gameId,
+                Name = "Harry Potter 2",
+                Creator = "J. K. Rowling",
                 ImageUrl = "https://cdn.ozone.bg/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/h/a/a19438e622aa321a0e73f360f1f3f855/harry-potter-and-the-philosopher-s-stone-30.jpg",
                 Rating = 10,
                 GenreId = genreId,
                 Description = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
             };
 
-            await dbContext.AddAsync(movie);
+            await dbContext.AddAsync(game);
             await dbContext.AddAsync(user);
             await dbContext.SaveChangesAsync();
 
-            await movieService.AddMovieToCollectionAsync(movieId, "1");
+            await gameService.AddGameToCollectionAsync(gameId, "1");
 
-            Assert.AreEqual(1, dbContext.Users.First().UsersMovies.Count());
-            Assert.AreEqual(1, dbContext.UsersMovies.Count());
-            Assert.AreEqual("1", dbContext.UsersMovies.First().UserId);
-            Assert.AreEqual(movieId, dbContext.UsersMovies.First().MovieId);
+            Assert.AreEqual(1, dbContext.Users.First().UsersGames.Count());
+            Assert.AreEqual(1, dbContext.UsersGames.Count());
+            Assert.AreEqual("1", dbContext.UsersGames.First().UserId);
+            Assert.AreEqual(gameId, dbContext.UsersGames.First().GameId);
         }
 
         [Test]
@@ -292,9 +291,9 @@ namespace Hobbies.UnitTests.Movies
                .UseInMemoryDatabase(Guid.NewGuid().ToString());
             var dbContext = new ApplicationDbContext(optionsBuilder.Options);
 
-            var movieService = new MovieService(dbContext);
+            var gameService = new GameService(dbContext);
             Guid genreId = Guid.NewGuid();
-            Guid movieId = Guid.NewGuid();
+            Guid gameId = Guid.NewGuid();
 
             var user = new User()
             {
@@ -303,38 +302,38 @@ namespace Hobbies.UnitTests.Movies
                 Email = "pesho@gmail.com"
             };
 
-            var movie = new Movie()
+            var game = new Game()
             {
-                Id = movieId,
-                Title = "Harry Potter 2",
-                Director = "J. K. Rowling",
+                Id = gameId,
+                Name = "Harry Potter 2",
+                Creator = "J. K. Rowling",
                 ImageUrl = "https://cdn.ozone.bg/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/h/a/a19438e622aa321a0e73f360f1f3f855/harry-potter-and-the-philosopher-s-stone-30.jpg",
                 Rating = 10,
                 GenreId = genreId,
                 Description = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
             };
 
-            await dbContext.AddAsync(movie);
+            await dbContext.AddAsync(game);
             await dbContext.AddAsync(user);
             await dbContext.SaveChangesAsync();
 
-            await movieService.AddMovieToCollectionAsync(movieId, "1");
+            await gameService.AddGameToCollectionAsync(gameId, "1");
 
-            var result = await movieService.GetMineAsync("1");
+            var result = await gameService.GetMineAsync("1");
 
             Assert.AreEqual(1, result.Count());
         }
 
         [Test]
-        public async Task CheckingIfRemoveMovieFromCollectionWorks()
+        public async Task CheckingIfRemoveGameFromCollectionWorks()
         {
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>()
                .UseInMemoryDatabase(Guid.NewGuid().ToString());
             var dbContext = new ApplicationDbContext(optionsBuilder.Options);
 
-            var movieService = new MovieService(dbContext);
+            var gameService = new GameService(dbContext);
             Guid genreId = Guid.NewGuid();
-            Guid movieId = Guid.NewGuid();
+            Guid gameId = Guid.NewGuid();
 
             var user = new User()
             {
@@ -343,53 +342,53 @@ namespace Hobbies.UnitTests.Movies
                 Email = "pesho@gmail.com"
             };
 
-            var movie = new Movie()
+            var game = new Game()
             {
-                Id = movieId,
-                Title = "Harry Potter 2",
-                Director = "J. K. Rowling",
+                Id = gameId,
+                Name = "Harry Potter 2",
+                Creator = "J. K. Rowling",
                 ImageUrl = "https://cdn.ozone.bg/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/h/a/a19438e622aa321a0e73f360f1f3f855/harry-potter-and-the-philosopher-s-stone-30.jpg",
                 Rating = 10,
                 GenreId = genreId,
                 Description = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
             };
 
-            await dbContext.AddAsync(movie);
+            await dbContext.AddAsync(game);
             await dbContext.AddAsync(user);
             await dbContext.SaveChangesAsync();
 
-            await movieService.AddMovieToCollectionAsync(movieId, "1");
+            await gameService.AddGameToCollectionAsync(gameId, "1");
 
-            Assert.AreEqual(1, dbContext.UsersMovies.Count());
+            Assert.AreEqual(1, dbContext.UsersGames.Count());
 
-            await movieService.RemoveMovieFromCollectionAsync(movieId, "1");
+            await gameService.RemoveGameFromCollectionAsync(gameId, "1");
 
-            Assert.AreEqual(0, dbContext.UsersMovies.Count());
+            Assert.AreEqual(0, dbContext.UsersGames.Count());
         }
 
         [Test]
-        public async Task CheckingMovieDetailsWorks()
+        public async Task CheckingGameDetailsWorks()
         {
 
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>()
                .UseInMemoryDatabase(Guid.NewGuid().ToString());
             var dbContext = new ApplicationDbContext(optionsBuilder.Options);
 
-            var movieService = new MovieService(dbContext);
+            var gameService = new GameService(dbContext);
             Guid genreId = Guid.NewGuid();
-            Guid movieId = Guid.NewGuid();
+            Guid gameId = Guid.NewGuid();
 
-            var genre = new MovieGenre()
+            var genre = new GameGenre()
             {
                 Id = genreId,
                 Name = "horror"
             };
 
-            var movie = new Movie()
+            var game = new Game()
             {
-                Id = movieId,
-                Title = "Harry Potter 2",
-                Director = "J. K. Rowling",
+                Id = gameId,
+                Name = "Harry Potter 2",
+                Creator = "J. K. Rowling",
                 ImageUrl = "https://cdn.ozone.bg/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/h/a/a19438e622aa321a0e73f360f1f3f855/harry-potter-and-the-philosopher-s-stone-30.jpg",
                 Rating = 10,
                 GenreId = genreId,
@@ -398,14 +397,14 @@ namespace Hobbies.UnitTests.Movies
             };
 
             await dbContext.AddAsync(genre);
-            await dbContext.AddAsync(movie);
+            await dbContext.AddAsync(game);
             await dbContext.SaveChangesAsync();
 
-            var result = movieService.MovieDetailsById(movieId);
+            var result = gameService.GameDetailsById(gameId);
 
             Assert.IsNotNull(result);
-            Assert.AreEqual(movie.Title, result.Result.Title);
-            Assert.AreEqual(movie.Id, result.Result.Id);
+            Assert.AreEqual(game.Name, result.Result.Name);
+            Assert.AreEqual(game.Id, result.Result.Id);
         }
     }
 }
