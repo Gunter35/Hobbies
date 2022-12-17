@@ -6,6 +6,7 @@ using System.Security.Claims;
 
 namespace Hobbies.Controllers
 {
+    [Authorize]
     public class MoviesController : Controller
     {
         private readonly IMovieService movieService;
